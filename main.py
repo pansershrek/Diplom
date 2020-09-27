@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 # Install TensorFlow
 try:
     # %tensorflow_version only exists in Colab.
@@ -12,9 +10,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
-
-
-from pprint import pprint
 
 my_dpi = 95
 
