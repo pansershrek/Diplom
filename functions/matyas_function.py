@@ -10,7 +10,7 @@ class MatyasFunction(BaseFunction):
 
     @staticmethod
     def get_minimum():
-        return convert_variables([0, 0])
+        return [convert_variables([0, 0])]
 
     @staticmethod
     @tf.function

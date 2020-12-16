@@ -10,7 +10,7 @@ class SmothFunction2(BaseFunction):
 
     @staticmethod
     def get_minimum():
-        return convert_variables([1, 1])
+        return [convert_variables([1, 1])]
 
     @staticmethod
     @tf.function

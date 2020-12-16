@@ -5,7 +5,7 @@ class BaseFunction():
 
     @staticmethod
     def get_minimum():
-        raise None
+        return None
 
     @staticmethod
     @tf.function

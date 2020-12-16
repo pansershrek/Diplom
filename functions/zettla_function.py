@@ -10,7 +10,7 @@ class ZettlaFunction(BaseFunction):
 
     @staticmethod
     def get_minimum():
-        return convert_variables([-0.029896, 0])
+        return [convert_variables([-0.029896, 0])]
 
     @staticmethod
     @tf.function

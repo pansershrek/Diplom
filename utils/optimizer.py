@@ -6,7 +6,7 @@ import pandas as pd
 from utils.utils import get_delta, get_numpy_array
 
 
-def optimize(f, x, opt, eps, result_val=None, max_steps=10**10, **kwargs):
+def optimize(f, x, opt, eps, result_vals=None, max_steps=10**10, **kwargs):
     history = {}
     x_cur = copy.deepcopy(x)
     x_old = copy.deepcopy(x)
@@ -24,7 +24,7 @@ def optimize(f, x, opt, eps, result_val=None, max_steps=10**10, **kwargs):
         x_delta = get_delta(x_old, x_cur)
         history[steps_num] = {
             "x": get_numpy_array(x_cur), "x_old": get_numpy_array(x_old),
-            "loss": loss_val.numpy(), "x_delta (L1 Norm)": x_delta,
+            "loss": loss_val.numpy(), "x_delta (L2 Norm)": x_delta,
         }
         x_old = copy.deepcopy(x_cur)
         if loss_val < loss_min:
@@ -32,12 +32,21 @@ def optimize(f, x, opt, eps, result_val=None, max_steps=10**10, **kwargs):
         if x_delta < eps:
             break
         steps_num += 1
-    min_delta = None
-    if result_val is not None:
-        min_delta = get_delta(result_val, x_min)
+    min_delta = []
+    min_delta_result = float('inf')
+    if result_vals is not None:
+        for result_val in result_vals:
+            min_delta.append(
+                {
+                    "min": get_numpy_array(result_val),
+                    "delta": get_delta(result_val, x_min),
+                }
+            )
+            min_delta_result = min(min_delta_result, min_delta[-1]["delta"])
     result = {
         "x_final": get_numpy_array(x_cur),
-        "min_delta (L1 Norm)": min_delta,
+        "min_delta_list (L2 Norm)": min_delta,
+        "min_delta_result": min_delta_result,
         "steps_num": steps_num,
         "history": history,
         "loss_min": loss_min.numpy(),
