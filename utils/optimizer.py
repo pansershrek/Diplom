@@ -13,6 +13,7 @@ def optimize(f, x, opt, eps, result_vals=None, max_steps=10**10, **kwargs):
     steps_num = 0
     x_min = copy.deepcopy(x)
     loss_min = f(x_min)
+
     while True:
         if steps_num >= max_steps:
             break
@@ -26,9 +27,11 @@ def optimize(f, x, opt, eps, result_vals=None, max_steps=10**10, **kwargs):
             "x": get_numpy_array(x_cur), "x_old": get_numpy_array(x_old),
             "loss": loss_val.numpy(), "x_delta (L2 Norm)": x_delta,
         }
+
         x_old = copy.deepcopy(x_cur)
         if loss_val < loss_min:
             x_min = copy.deepcopy(x_cur)
+            loss_min = loss_val
         if x_delta < eps:
             break
         steps_num += 1

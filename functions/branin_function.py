@@ -18,9 +18,10 @@ class BraninFunction(BaseFunction):
         ]
 
     @staticmethod
+    @tf.function
     def __call__(x):
         return (
             (x[1] - 5.1 * x[0]**2 / (4 * math.pi ** 2) + 5 * x[0] / math.pi - 6)**2 +
-            10 * (1 - 1 / (8 * math.pi)) * math.cos(math.radians(x[0].numpy()))
+            10 * (1 - 1 / (8 * math.pi)) * tf.cos(x[0] * math.pi / 180)
             + 10
         )
