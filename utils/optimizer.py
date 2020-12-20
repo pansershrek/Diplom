@@ -21,7 +21,6 @@ def optimize(f, x, opt, eps, result_vals=None, max_steps=10**10, **kwargs):
             loss_val = f(x_cur)
         gradients = t.gradient(loss_val, x_cur)
         opt.apply_gradients(zip(gradients, x_cur))
-        x_delta = 0
         x_delta = get_delta(x_old, x_cur)
         history[steps_num] = {
             "x": get_numpy_array(x_cur), "x_old": get_numpy_array(x_old),
