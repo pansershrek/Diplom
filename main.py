@@ -38,6 +38,18 @@ from approximate_functions.approximate_function1 import ApproximateFunction1
 from target_functions.target_function1 import TargetFunction1
 from approximate_options.approximate_options1 import approximate_options1
 
+from approximate_functions.approximate_function2 import ApproximateFunction2
+from target_functions.target_function2 import TargetFunction2
+from approximate_options.approximate_options2 import approximate_options2
+
+from approximate_functions.approximate_function3 import ApproximateFunction3
+from target_functions.target_function3 import TargetFunction3
+from approximate_options.approximate_options3 import approximate_options3
+
+from approximate_functions.approximate_function4 import ApproximateFunction4
+from target_functions.target_function4 import TargetFunction4
+from approximate_options.approximate_options4 import approximate_options4
+
 
 def minimize_example(args):
     result = process_optimize(
@@ -57,7 +69,7 @@ def minimize_example(args):
 
 def approximate_example(args):
     result = proccess_approximate(
-        ApproximateFunction1(), TargetFunction1(), approximate_options1
+        ApproximateFunction4(), TargetFunction4(), approximate_options4
     )
     with open(args.ans, "w") as file:
         print(result, file=file)

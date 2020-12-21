@@ -5,7 +5,7 @@ import math
 from .base_class import BaseFunction
 
 
-class ApproximateFunction1(BaseFunction):
+class ApproximateFunction2(BaseFunction):
 
     def __call__(self, params):
         return (
