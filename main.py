@@ -64,7 +64,11 @@ def approximate_example(args):
     with open(args.short_ans, "w") as file:
         for x in result.values():
             x["result"].pop("history")
-            print(f'Val loss: {x["result"]["loss_validate"]}')
+            print(
+                f'Val loss: {x["result"]["loss_validate"]}, '
+                f'Train loss: {x["result"]["loss_min"]},\n'
+                f'params_min: {x["result"]["params_min"]}\n'
+            )
         print(result, file=file)
 
 
@@ -79,8 +83,8 @@ def main():
         help="Pathname to file with short answer"
     )
     args = parser.parse_args()
-    # approximate_example(args)
-    minimize_example(args)
+    approximate_example(args)
+    # minimize_example(args)
 
 if __name__ == "__main__":
     main()

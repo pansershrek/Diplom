@@ -14,7 +14,7 @@ class BaseFunction():
             for idy in range(params_len // x_list_len):
                 result += (
                     self.x[idx] ** (params_len // x_list_len - 1 - idy) *
-                    params[idy + idx * x_list_len]
+                    params[idy + idx * (params_len // x_list_len)]
                 )
         return result
 

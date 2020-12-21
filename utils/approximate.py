@@ -61,7 +61,8 @@ def approximate(f, f_target, var_list, var_list_validate, params, loss_function,
         "steps_num": steps_num,
         "history": history,
         "loss_min": loss_min.numpy(),
-        "loss_validate": loss_validate,
+        "loss_validate": loss_validate.numpy(),
+        "params_min": get_numpy_array(params_min),
     }
 
     return result
