@@ -50,11 +50,14 @@ def approximate(f, f_target, var_list, var_list_validate, params, loss_function,
             break
         steps_num += 1
 
+    f_target_val = []
+    f_val = []
     for x in var_list_validate:
         f.set_var_list(x)
         f_target.set_var_list(x)
         f_val.append(f(params_min))
         f_target_val.append(f_target())
+
     loss_validate = loss_function(f_target_val, f_val)
 
     result = {
