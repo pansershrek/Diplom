@@ -6,14 +6,26 @@ import pandas as pd
 from utils.utils import get_delta, get_numpy_array
 
 
-def optimize(f, x, opt, eps, result_vals=None, max_steps=10**10, **kwargs):
-    history = {}
-    x_cur = copy.deepcopy(x)
-    x_old = copy.deepcopy(x)
-    steps_num = 0
-    x_min = copy.deepcopy(x)
-    loss_min = f(x_min)
+def optimize(f, optimize_option):
+    """Minimize target fuction with specific option
 
+    :param f: optimize function
+    :type f: heir from BaseFunction
+    :param optimize_option: specific optimize option
+    :type optimize_option: dict
+    :return: result of optimization
+    :rtype: dict
+    """
+    history = {}
+    x_cur = copy.deepcopy(optimize_option["x"])
+    x_old = copy.deepcopy(optimize_option["x"])
+    steps_num = 0
+    x_min = copy.deepcopy(optimize_option["x"])
+    loss_min = f(x_min)
+    max_steps = optimize_option.get("max_steps", 10**10)
+    eps = optimize_option["eps"]
+    result_vals = f.get_minimum()
+    opt = optimize_option["opt"]
     while True:
         if steps_num >= max_steps:
             break

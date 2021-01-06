@@ -6,14 +6,31 @@ import pandas as pd
 from utils.utils import get_delta, get_numpy_array
 
 
-def approximate(f, f_target, var_list, var_list_validate, params, loss_function, opt, eps, max_steps=10**10, **kwargs):
+def approximate(f, f_target, approximate_option):
+    """Approximate target fuction with specific option
+
+    :param f: approximate function
+    :type f: heir from BaseApproximateFunction
+    :param f_target: target function
+    :type f_target: heir from BaseTargetFunction
+    :param approximate_option: specific approximate option
+    :type approximate_option: dict
+    :return: result of approximation
+    :rtype: dict
+    """
     history = {}
-    params_cur = copy.deepcopy(params)
-    params_old = copy.deepcopy(params)
+    params_cur = copy.deepcopy(approximate_option["params"])
+    params_old = copy.deepcopy(approximate_option["params"])
     steps_num = 0
-    params_min = copy.deepcopy(params)
+    params_min = copy.deepcopy(approximate_option["params"])
     f_target_val = []
     f_val = []
+    var_list = approximate_option["x"]
+    var_list_validate = approximate_option["x_validate"]
+    loss_function = approximate_option["loss_function"]
+    opt = approximate_option["opt"]
+    eps = approximate_option["eps"]
+    max_steps = approximate_option.get("max_steps", 10**10)
     for x in var_list:
         f.set_var_list(x)
         f_target.set_var_list(x)

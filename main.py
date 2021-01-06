@@ -52,6 +52,11 @@ from approximate_options.approximate_options4 import approximate_options4
 
 
 def minimize_example(args):
+    """Solve the minimization problem
+
+    :param args: command line arguments
+    :type args: argparse.Namespace
+    """
     result = process_optimize(
         SmothFunction1(), smooth_function_options1
     )
@@ -68,6 +73,11 @@ def minimize_example(args):
 
 
 def approximate_example(args):
+    """Solve the approximate problem
+
+    :param args: command line arguments
+    :type args: argparse.Namespace
+    """
     result = proccess_approximate(
         ApproximateFunction4(), TargetFunction4(), approximate_options4
     )
@@ -96,7 +106,7 @@ def main():
     )
     args = parser.parse_args()
     approximate_example(args)
-    # minimize_example(args)
+    minimize_example(args)
 
 if __name__ == "__main__":
     main()

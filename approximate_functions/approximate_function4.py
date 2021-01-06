@@ -2,10 +2,10 @@ import numpy as np
 import tensorflow as tf
 import math
 
-from .base_class import BaseFunction
+from .base_class import BaseApproximateFunction
 
 
-class ApproximateFunction4(BaseFunction):
+class ApproximateFunction4(BaseApproximateFunction):
 
     def __call__(self, params):
         return (

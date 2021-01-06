@@ -1,7 +1,7 @@
 import tensorflow as tf
 
 
-class BaseFunction():
+class BaseApproximateFunction():
 
     def set_var_list(self, var_list):
         self.x = var_list
