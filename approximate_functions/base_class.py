@@ -4,19 +4,17 @@ import tensorflow as tf
 class BaseApproximateFunction():
 
     def set_var_list(self, var_list):
+        """Save list of points to class instance
+
+        :param var_list: list of points
+        :type f: list
+        """
         self.x = var_list
 
-    def _linear_transformation(self, params):
-        result = 0
-        x_list_len = len(self.x)
-        params_len = len(params)
-        for idx in range(x_list_len):
-            for idy in range(params_len // x_list_len):
-                result += (
-                    self.x[idx] ** (params_len // x_list_len - 1 - idy) *
-                    params[idy + idx * (params_len // x_list_len)]
-                )
-        return result
-
     def __call__(params):
+        """Сalculate function value with params
+
+        :param params: params
+        :type params: list
+        """
         raise NotImplementedError

@@ -2,6 +2,9 @@ import tensorflow as tf
 
 from utils.utils import convert_variables
 
+"""
+Minimize options
+"""
 
 branin_function_options = [
     {

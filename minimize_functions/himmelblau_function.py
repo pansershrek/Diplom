@@ -10,6 +10,11 @@ class HimmelblauFunction(BaseFunction):
 
     @staticmethod
     def get_minimum():
+        """Get list of function minimimums
+
+        :return: list of function minimimums
+        :rtype: list
+        """
         return [
             convert_variables([3, 2]),
             convert_variables([-2.80518, 3.131312]),
@@ -20,4 +25,9 @@ class HimmelblauFunction(BaseFunction):
     @staticmethod
     @tf.function
     def __call__(x):
+        """Сalculate function value in point x
+
+        :param x: point
+        :type x: list
+        """
         return (x[0]**2 + x[1] - 11)**2 + (x[0] + x[1]**2 - 7)**2

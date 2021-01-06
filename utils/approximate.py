@@ -36,9 +36,11 @@ def approximate(f, f_target, approximate_option):
         f_target.set_var_list(x)
         f_val.append(f(params_cur))
         f_target_val.append(f_target())
+    # Calculate nearness of target and approximate function
     loss_min = loss_function(f_target_val, f_val)
 
     while True:
+        # Approximate cycle
         if steps_num >= max_steps:
             break
         with tf.GradientTape() as t:
@@ -49,6 +51,7 @@ def approximate(f, f_target, approximate_option):
                 f_target.set_var_list(x)
                 f_val.append(f(params_cur))
                 f_target_val.append(f_target())
+            # Calculate nearness of target and approximate function
             loss_val = loss_function(f_target_val, f_val)
 
         gradients = t.gradient(loss_val, params_cur)

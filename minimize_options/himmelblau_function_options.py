@@ -2,6 +2,9 @@ import tensorflow as tf
 
 from utils.utils import convert_variables
 
+"""
+Minimize options
+"""
 
 himmelblau_function_options = [
     {

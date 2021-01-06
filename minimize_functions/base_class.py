@@ -15,4 +15,9 @@ class BaseFunction():
     @staticmethod
     @tf.function
     def __call__(x):
+        """Сalculate function value in point x
+
+        :param x: point
+        :type x: list
+        """
         raise NotImplementedError

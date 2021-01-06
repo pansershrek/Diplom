@@ -27,6 +27,7 @@ def optimize(f, optimize_option):
     result_vals = f.get_minimum()
     opt = optimize_option["opt"]
     while True:
+        # Minimize cycle
         if steps_num >= max_steps:
             break
         with tf.GradientTape() as t:

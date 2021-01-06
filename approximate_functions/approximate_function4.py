@@ -8,6 +8,11 @@ from .base_class import BaseApproximateFunction
 class ApproximateFunction4(BaseApproximateFunction):
 
     def __call__(self, params):
+        """Сalculate function value with params
+
+        :param params: params
+        :type params: list
+        """
         return (
             params[0] * self.x[0]**2 + params[1] * self.x[0] + params[2] +
             params[3] * self.x[0]**2 + params[4] * self.x[0] + params[5] +

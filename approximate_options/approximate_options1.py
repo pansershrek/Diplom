@@ -3,6 +3,9 @@ import tensorflow as tf
 
 from utils.utils import convert_variables, convert_variables_without_trainable
 
+"""
+Approximate options
+"""
 
 approximate_options1 = [
     {

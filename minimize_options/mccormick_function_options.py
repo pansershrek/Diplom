@@ -2,6 +2,9 @@ import tensorflow as tf
 
 from utils.utils import convert_variables
 
+"""
+Minimize options
+"""
 
 mccormick_function_options = [
     {
