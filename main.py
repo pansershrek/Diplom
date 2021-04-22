@@ -50,6 +50,14 @@ from approximate_functions.approximate_function4 import ApproximateFunction4
 from target_functions.target_function4 import TargetFunction4
 from approximate_options.approximate_options4 import approximate_options4
 
+from approximate_functions.approximate_function5 import ApproximateFunction5
+from target_functions.target_function5 import TargetFunction5
+from approximate_options.approximate_options5 import approximate_options5
+
+from approximate_functions.approximate_function6 import ApproximateFunction6
+from target_functions.target_function6 import TargetFunction6
+from approximate_options.approximate_options6 import approximate_options6
+
 
 def minimize_example(args):
     """Solve the minimization problem
@@ -58,7 +66,7 @@ def minimize_example(args):
     :type args: argparse.Namespace
     """
     result = process_optimize(
-        SmothFunction1(), smooth_function_options1
+        SchmittWettersFunction(), schmitt_wetters_function_options
     )
     with open(args.ans, "w") as file:
         print(result, file=file)
@@ -67,7 +75,8 @@ def minimize_example(args):
             x["result"].pop("history")
             print(
                 f'X value: {x["result"]["x_min"]}, ' +
-                f'distance to min: {x["result"]["min_delta_result"]}'
+                f'distance to min: {x["result"]["min_delta_result"]}, ' +
+                f'N steps: {x["result"]["steps_num"]}'
             )
         print(result, file=file)
 
@@ -79,7 +88,7 @@ def approximate_example(args):
     :type args: argparse.Namespace
     """
     result = proccess_approximate(
-        ApproximateFunction4(), TargetFunction4(), approximate_options4
+        ApproximateFunction6(), TargetFunction6(), approximate_options6
     )
     with open(args.ans, "w") as file:
         print(result, file=file)
@@ -106,7 +115,7 @@ def main():
     )
     args = parser.parse_args()
     approximate_example(args)
-    minimize_example(args)
+    # minimize_example(args)
 
 if __name__ == "__main__":
     main()
