@@ -36,7 +36,7 @@ def convert_params(vals):
     return result
 
 
-def get_numpy_array(args):
+def get_numpy_array(args, k=None):
     """Convert list of tf.Variables to np.array with floats
 
     :param var_list: list of tf.Variables
@@ -44,7 +44,20 @@ def get_numpy_array(args):
     :return: np.array with floats
     :rtype: np.array
     """
+    if k:
+        return np.around(np.array([np.around(x.numpy(), k) for x in args], dtype=float), k)
     return np.array([x.numpy() for x in args], dtype=float)
+
+
+def get_tuple(args):
+    """Convert list of tf.Variables to np.array with floats
+
+    :param var_list: list of tf.Variables
+    :type var_list: list
+    :return: np.array with floats
+    :rtype: np.array
+    """
+    return [tuple(x.numpy()) for x in list(args)]
 
 
 def get_delta(x_old, x_cur):
@@ -60,3 +73,7 @@ def get_delta(x_old, x_cur):
     return float(np.linalg.norm(
         get_numpy_array(x_old) - get_numpy_array(x_cur)
     ))
+
+
+def rmse(a, b):
+    return tf.sqrt(tf.keras.losses.MSE(a, b))

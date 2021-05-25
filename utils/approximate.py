@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 from utils.utils import get_delta, get_numpy_array
+from utils.generate_data import add_noise
 
 
 def approximate(f, f_target, approximate_option):
@@ -31,6 +32,30 @@ def approximate(f, f_target, approximate_option):
     opt = approximate_option["opt"]
     eps = approximate_option["eps"]
     max_steps = approximate_option.get("max_steps", 10**10)
+    val = approximate_option.get("val", None)
+    if val:
+        f_target.val = val
+    full_x = np.concatenate((np.array(var_list), np.array(var_list_validate)))
+    full_y = []
+    for x in full_x:
+        f_target.set_var_list(x)
+        full_y.append(f_target())
+    full_y = np.array(full_y)
+    snr = approximate_option.get("snr", None)
+    mean = approximate_option.get("mean", 0)
+    std = approximate_option.get("std", 1)
+    probability_threshold = approximate_option.get(
+        "probability_threshold", 0.5
+    )
+    seed = approximate_option.get("seed", 42)
+    noise_type = approximate_option.get("noise_type", "")
+    x2y = add_noise(
+        full_x, full_y, noise_type, snr, mean,
+        std, probability_threshold, seed
+    )
+    if noise_type:
+        f_target.set_x2y(x2y)
+
     for x in var_list:
         f.set_var_list(x)
         f_target.set_var_list(x)
