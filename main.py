@@ -154,7 +154,7 @@ def main():
         help="Pathname to file with short answer"
     )
     args = parser.parse_args()
-
+    all_snr = [None, 1, 10, 0.1]
     losses = [
         [tf.keras.losses.MAE, "MAE"],
         [tf.keras.losses.MSE, "MSE"],
@@ -183,20 +183,19 @@ def main():
         [approximate_options72, ApproximateFunction7_2, "Furie"],
         [approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
+
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             for option, option_name in all_options:
-                for x in option:
-                    x["loss_function"] = loss
-                approximate_example(
-                    args, approximate_function, TargetFunction7,
-                    option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
-                )
-    losses = [
-        [tf.keras.losses.MAE, "MAE"],
-        [tf.keras.losses.MSE, "MSE"],
-        [rmse, "RMSE"],
-    ]
+                for snr in all_snr:
+                    for x in option:
+                        x["loss_function"] = loss
+                        x["snr"] = snr
+                    approximate_example(
+                        args, approximate_function, TargetFunction7,
+                        option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
+                    )
+
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
         [approximate_options8_1_white_noise, "WhiteNoise"],
@@ -220,20 +219,18 @@ def main():
         [approximate_options82, ApproximateFunction8_2, "Furie"],
         [approximate_options83, ApproximateFunction8_3, "Exp"],
     ]
+
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options8:
             for option, option_name in all_options:
-                for x in option:
-                    x["loss_function"] = loss
-                approximate_example(
-                    args, approximate_function, TargetFunction8,
-                    option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
-                )
-    losses = [
-        [tf.keras.losses.MAE, "MAE"],
-        [tf.keras.losses.MSE, "MSE"],
-        [rmse, "RMSE"],
-    ]
+                for snr in all_snr:
+                    for x in option:
+                        x["loss_function"] = loss
+                        x["snr"] = snr
+                    approximate_example(
+                        args, approximate_function, TargetFunction8,
+                        option, f"Сontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
+                    )
     approximate_options91 = [
         [approximate_options9_1, "WithoutNoise"],
         [approximate_options9_1_white_noise, "WhiteNoise"],
@@ -257,15 +254,18 @@ def main():
         [approximate_options92, ApproximateFunction9_2, "Furie"],
         [approximate_options93, ApproximateFunction9_3, "Exp"],
     ]
+
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options9:
             for option, option_name in all_options:
-                for x in option:
-                    x["loss_function"] = loss
-                approximate_example(
-                    args, approximate_function, TargetFunction9,
-                    option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
-                )
+                for snr in all_snr:
+                    for x in option:
+                        x["loss_function"] = loss
+                        x["snr"] = snr
+                    approximate_example(
+                        args, approximate_function, TargetFunction9,
+                        option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
+                    )
     # minimize_example(args)
 
 if __name__ == "__main__":
