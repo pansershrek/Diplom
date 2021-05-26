@@ -154,7 +154,7 @@ def main():
         help="Pathname to file with short answer"
     )
     args = parser.parse_args()
-    all_snr = [None, 1, 10, 0.1]
+    all_snr = [None]
     losses = [
         [tf.keras.losses.MAE, "MAE"],
         [tf.keras.losses.MSE, "MSE"],
@@ -162,21 +162,21 @@ def main():
     ]
     approximate_options71 = [
         [approximate_options7_1, "WithoutNoise"],
-        [approximate_options7_1_white_noise, "WhiteNoise"],
-        [approximate_options7_1_gaussian_noise, "GaussianNoise"],
-        [approximate_options7_1_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options7_1_white_noise, "WhiteNoise"],
+        #[approximate_options7_1_gaussian_noise, "GaussianNoise"],
+        #[approximate_options7_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options72 = [
         [approximate_options7_2, "WithoutNoise"],
-        [approximate_options7_2_white_noise, "WhiteNoise"],
-        [approximate_options7_2_gaussian_noise, "GaussianNoise"],
-        [approximate_options7_2_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options7_2_white_noise, "WhiteNoise"],
+        #[approximate_options7_2_gaussian_noise, "GaussianNoise"],
+        #[approximate_options7_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options73 = [
         [approximate_options7_3, "WithoutNoise"],
-        [approximate_options7_3_white_noise, "WhiteNoise"],
-        [approximate_options7_3_gaussian_noise, "GaussianNoise"],
-        [approximate_options7_3_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options7_3_white_noise, "WhiteNoise"],
+        #[approximate_options7_3_gaussian_noise, "GaussianNoise"],
+        #[approximate_options7_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options7 = [
         [approximate_options71, ApproximateFunction7_1, "Polinom"],
@@ -195,7 +195,7 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-
+"""
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
         [approximate_options8_1_white_noise, "WhiteNoise"],
@@ -267,6 +267,7 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     # minimize_example(args)
+"""
 
 if __name__ == "__main__":
     main()
