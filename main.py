@@ -108,11 +108,11 @@ def minimize_example(args, f, opt):
         print(result, file=file)
 
 metrix = [
-    "SGD(10000)", "SGD(1000)", "SGD(100)", "SGD(10)",
-    "SGDM(10000,0.1)", "SGDM(1000,0.1)", "SGDM(100,0.1)", "SGDM(10,0.1)",
-    "SGDM(10000,0.5)", "SGDM(1000,0.5)", "SGDM(100,0.5)", "SGDM(10,0.5)",
-    "SGDM(10000,0.9)", "SGDM(1000,0.9)", "SGDM(100,0.9)", "SGDM(10,0.9)",
-    "Nesterov(10000,0.5)", "Nesterov(1000,0.5)", "Nesterov(100,0.5)", "Nesterov(10,0.5)",
+    "SGD(100000)", "SGD(10000)", "SGD(1000)", "SGD(100)",
+    "SGDM(100000,0.1)", "SGDM(10000,0.1)", "SGDM(1000,0.1)", "SGDM(100,0.1)",
+    "SGDM(100000,0.5)", "SGDM(10000,0.5)", "SGDM(1000,0.5)", "SGDM(100,0.5)",
+    "SGDM(100000,0.9)", "SGDM(10000,0.9)", "SGDM(1000,0.9)", "SGDM(100,0.9)",
+    "Nesterov(100000,0.5)", "Nesterov(10000,0.5)", "Nesterov(1000,0.5)", "Nesterov(100,0.5)",
     "Adagrad(1)", "Adagrad(0.1)", "Adagrad(0.01)", "Adagrad(0.001)",
     "Adam(1)", "Adam(0.1)", "Adam(0.01)", "Adam(0.001)",
 ]
@@ -195,24 +195,23 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-"""
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
-        [approximate_options8_1_white_noise, "WhiteNoise"],
-        [approximate_options8_1_gaussian_noise, "GaussianNoise"],
-        [approximate_options8_1_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options8_1_white_noise, "WhiteNoise"],
+        #[approximate_options8_1_gaussian_noise, "GaussianNoise"],
+        #[approximate_options8_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options82 = [
         [approximate_options8_2, "WithoutNoise"],
-        [approximate_options8_2_white_noise, "WhiteNoise"],
-        [approximate_options8_2_gaussian_noise, "GaussianNoise"],
-        [approximate_options8_2_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options8_2_white_noise, "WhiteNoise"],
+        #[approximate_options8_2_gaussian_noise, "GaussianNoise"],
+        #[approximate_options8_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options83 = [
         [approximate_options8_3, "WithoutNoise"],
-        [approximate_options8_3_white_noise, "WhiteNoise"],
-        [approximate_options8_3_gaussian_noise, "GaussianNoise"],
-        [approximate_options8_3_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options8_3_white_noise, "WhiteNoise"],
+        #[approximate_options8_3_gaussian_noise, "GaussianNoise"],
+        #[approximate_options8_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options8 = [
         [approximate_options81, ApproximateFunction8_1, "Polinom"],
@@ -233,21 +232,21 @@ def main():
                     )
     approximate_options91 = [
         [approximate_options9_1, "WithoutNoise"],
-        [approximate_options9_1_white_noise, "WhiteNoise"],
-        [approximate_options9_1_gaussian_noise, "GaussianNoise"],
-        [approximate_options9_1_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options9_1_white_noise, "WhiteNoise"],
+        #[approximate_options9_1_gaussian_noise, "GaussianNoise"],
+        #[approximate_options9_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options92 = [
         [approximate_options9_2, "WithoutNoise"],
-        [approximate_options9_2_white_noise, "WhiteNoise"],
-        [approximate_options9_2_gaussian_noise, "GaussianNoise"],
-        [approximate_options9_2_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options9_2_white_noise, "WhiteNoise"],
+        #[approximate_options9_2_gaussian_noise, "GaussianNoise"],
+        #[approximate_options9_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options93 = [
         [approximate_options9_3, "WithoutNoise"],
-        [approximate_options9_3_white_noise, "WhiteNoise"],
-        [approximate_options9_3_gaussian_noise, "GaussianNoise"],
-        [approximate_options9_3_salt_and_papper_noise, "SaltAndPapperNoise"],
+        #[approximate_options9_3_white_noise, "WhiteNoise"],
+        #[approximate_options9_3_gaussian_noise, "GaussianNoise"],
+        #[approximate_options9_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options9 = [
         [approximate_options91, ApproximateFunction9_1, "Polinom"],
@@ -267,7 +266,6 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     # minimize_example(args)
-"""
 
 if __name__ == "__main__":
     main()
