@@ -108,11 +108,11 @@ def minimize_example(args, f, opt):
         print(result, file=file)
 
 metrix = [
-    "SGD(1)", "SGD(0.1)", "SGD(0.01)", "SGD(0.001)",
-    "SGDM(1,0.1)", "SGDM(0.1,0.1)", "SGDM(0.01,0.1)", "SGDM(0.001,0.1)",
-    "SGDM(1,0.5)", "SGDM(0.1,0.5)", "SGDM(0.01,0.5)", "SGDM(0.001,0.5)",
-    "SGDM(1,0.9)", "SGDM(0.1,0.9)", "SGDM(0.01,0.9)", "SGDM(0.001,0.9)",
-    "Nesterov(1,0.5)", "Nesterov(0.1,0.5)", "Nesterov(0.01,0.5)", "Nesterov(0.001,0.5)",
+    "SGD(10000)", "SGD(1000)", "SGD(100)", "SGD(10)",
+    "SGDM(10000,0.1)", "SGDM(1000,0.1)", "SGDM(100,0.1)", "SGDM(10,0.1)",
+    "SGDM(10000,0.5)", "SGDM(1000,0.5)", "SGDM(100,0.5)", "SGDM(10,0.5)",
+    "SGDM(10000,0.9)", "SGDM(1000,0.9)", "SGDM(100,0.9)", "SGDM(10,0.9)",
+    "Nesterov(10000,0.5)", "Nesterov(1000,0.5)", "Nesterov(100,0.5)", "Nesterov(10,0.5)",
     "Adagrad(1)", "Adagrad(0.1)", "Adagrad(0.01)", "Adagrad(0.001)",
     "Adam(1)", "Adam(0.1)", "Adam(0.01)", "Adam(0.001)",
 ]
