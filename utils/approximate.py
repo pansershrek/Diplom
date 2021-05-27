@@ -49,10 +49,12 @@ def approximate(f, f_target, approximate_option):
     )
     seed = approximate_option.get("seed", 42)
     noise_type = approximate_option.get("noise_type", "")
+    """
     x2y = add_noise(
         full_x, full_y, noise_type, snr, mean,
         std, probability_threshold, seed
     )
+    """
     if noise_type:
         f_target.set_x2y(x2y)
 

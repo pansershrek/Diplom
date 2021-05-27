@@ -295,7 +295,7 @@ approximate_options9_1 = [
         "max_steps": 300,
     },
 ]
-
+"""
 approximate_options9_1_white_noise = [
     copy.deepcopy(x) for x in approximate_options9_1
 ]
@@ -319,3 +319,4 @@ for x in approximate_options9_1_salt_and_papper_noise:
     x["noise_type"] = "salt_and_papper_noise"
     x["seed"] = 42
     x["probability_threshold"] = 0.3
+"""
