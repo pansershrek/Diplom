@@ -179,8 +179,8 @@ def main():
     ]
     all_approximate_options7 = [
         [approximate_options71, ApproximateFunction7_1, "Polinom"],
-        #[approximate_options72, ApproximateFunction7_2, "Furie"],
-        #[approximate_options73, ApproximateFunction7_3, "Exp"],
+        [approximate_options72, ApproximateFunction7_2, "Furie"],
+        [approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
