@@ -4,7 +4,7 @@ import json
 import tensorflow as tf
 
 from utils.process import process_optimize, proccess_approximate
-from utils.utils import rmse
+from utils.utils import rmse, L_inf
 
 from minimize_functions.smooth_function1 import SmothFunction1
 from minimize_options.smooth_function_options1 import smooth_function_options1
@@ -64,26 +64,26 @@ from approximate_functions.approximate_function7_1 import ApproximateFunction7_1
 from approximate_functions.approximate_function7_2 import ApproximateFunction7_2
 from approximate_functions.approximate_function7_3 import ApproximateFunction7_3
 from target_functions.target_function7 import TargetFunction7
-from approximate_options.approximate_options7_1 import approximate_options7_1, approximate_options7_1_white_noise, approximate_options7_1_gaussian_noise, approximate_options7_1_salt_and_papper_noise
-from approximate_options.approximate_options7_2 import approximate_options7_2, approximate_options7_2_white_noise, approximate_options7_2_gaussian_noise, approximate_options7_2_salt_and_papper_noise
-from approximate_options.approximate_options7_3 import approximate_options7_3, approximate_options7_3_white_noise, approximate_options7_3_gaussian_noise, approximate_options7_3_salt_and_papper_noise
+from approximate_options.approximate_options7_1 import approximate_options7_1
+from approximate_options.approximate_options7_2 import approximate_options7_2
+from approximate_options.approximate_options7_3 import approximate_options7_3
 
 from approximate_functions.approximate_function8_1 import ApproximateFunction8_1
 from approximate_functions.approximate_function8_2 import ApproximateFunction8_2
 from approximate_functions.approximate_function8_3 import ApproximateFunction8_3
 from target_functions.target_function8 import TargetFunction8
-from approximate_options.approximate_options8_1 import approximate_options8_1, approximate_options8_1_white_noise, approximate_options8_1_gaussian_noise, approximate_options8_1_salt_and_papper_noise
-from approximate_options.approximate_options8_2 import approximate_options8_2, approximate_options8_2_white_noise, approximate_options8_2_gaussian_noise, approximate_options8_2_salt_and_papper_noise
-from approximate_options.approximate_options8_3 import approximate_options8_3, approximate_options8_3_white_noise, approximate_options8_3_gaussian_noise, approximate_options8_3_salt_and_papper_noise
+from approximate_options.approximate_options8_1 import approximate_options8_1
+from approximate_options.approximate_options8_2 import approximate_options8_2
+from approximate_options.approximate_options8_3 import approximate_options8_3
 
 
 from approximate_functions.approximate_function9_1 import ApproximateFunction9_1
 from approximate_functions.approximate_function9_2 import ApproximateFunction9_2
 from approximate_functions.approximate_function9_3 import ApproximateFunction9_3
 from target_functions.target_function9 import TargetFunction9
-from approximate_options.approximate_options9_1 import approximate_options9_1, approximate_options9_1_white_noise, approximate_options9_1_gaussian_noise, approximate_options9_1_salt_and_papper_noise
-from approximate_options.approximate_options9_2 import approximate_options9_2, approximate_options9_2_white_noise, approximate_options9_2_gaussian_noise, approximate_options9_2_salt_and_papper_noise
-from approximate_options.approximate_options9_3 import approximate_options9_3, approximate_options9_3_white_noise, approximate_options9_3_gaussian_noise, approximate_options9_3_salt_and_papper_noise
+from approximate_options.approximate_options9_1 import approximate_options9_1
+from approximate_options.approximate_options9_2 import approximate_options9_2
+from approximate_options.approximate_options9_3 import approximate_options9_3
 
 
 def minimize_example(args, f, opt):
@@ -156,9 +156,9 @@ def main():
     args = parser.parse_args()
     all_snr = [None]
     losses = [
-        [tf.keras.losses.MAE, "MAE"],
-        [tf.keras.losses.MSE, "MSE"],
-        [rmse, "RMSE"],
+        [tf.keras.losses.MAE, "L_1"],
+        [rmse, "L_2"],
+        [L_inf, "L_inf"],
     ]
     approximate_options71 = [
         [approximate_options7_1, "WithoutNoise"],
@@ -167,21 +167,21 @@ def main():
         #[approximate_options7_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options72 = [
-        [approximate_options7_2, "WithoutNoise"],
+        #[approximate_options7_2, "WithoutNoise"],
         #[approximate_options7_2_white_noise, "WhiteNoise"],
         #[approximate_options7_2_gaussian_noise, "GaussianNoise"],
         #[approximate_options7_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options73 = [
-        [approximate_options7_3, "WithoutNoise"],
+        #[approximate_options7_3, "WithoutNoise"],
         #[approximate_options7_3_white_noise, "WhiteNoise"],
         #[approximate_options7_3_gaussian_noise, "GaussianNoise"],
         #[approximate_options7_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options7 = [
         [approximate_options71, ApproximateFunction7_1, "Polinom"],
-        [approximate_options72, ApproximateFunction7_2, "Furie"],
-        [approximate_options73, ApproximateFunction7_3, "Exp"],
+        #[approximate_options72, ApproximateFunction7_2, "Furie"],
+        #[approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
 
     for loss, loss_name in losses:
@@ -195,6 +195,7 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
+"""
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
         #[approximate_options8_1_white_noise, "WhiteNoise"],
@@ -266,6 +267,6 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     # minimize_example(args)
-
+"""
 if __name__ == "__main__":
     main()

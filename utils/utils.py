@@ -77,3 +77,8 @@ def get_delta(x_old, x_cur):
 
 def rmse(a, b):
     return tf.sqrt(tf.keras.losses.MSE(a, b))
+
+
+def L_inf(a, b):
+    c = a - b
+    return np.max(c.numpy())
