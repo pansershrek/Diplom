@@ -128,8 +128,6 @@ def approximate_example(args, f, target, opt, name=""):
         f(), target(), opt
     )
     with open(args.ans, "w") as file:
-        print(result, file=file)
-    with open(args.short_ans, "w") as file:
         for x, y in zip(result.values(), metrix):
             x["result"].pop("history")
             new_result = {
@@ -139,8 +137,7 @@ def approximate_example(args, f, target, opt, name=""):
                 "metix": y,
             }
             print(json.dumps(new_result), flush=True)
-
-        print(result, file=file)
+            print(json.dumps(new_result), file=file, flush=True)
 
 
 def main():
@@ -160,7 +157,6 @@ def main():
         [rmse, "L_2"],
         [L_inf, "L_inf"],
     ]
-    """
     approximate_options71 = [
         [approximate_options7_1, "WithoutNoise"],
         #[approximate_options7_1_white_noise, "WhiteNoise"],
@@ -181,8 +177,8 @@ def main():
     ]
     all_approximate_options7 = [
         [approximate_options71, ApproximateFunction7_1, "Polinom"],
-        #[approximate_options72, ApproximateFunction7_2, "Furie"],
-        #[approximate_options73, ApproximateFunction7_3, "Exp"],
+        [approximate_options72, ApproximateFunction7_2, "Furie"],
+        [approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
@@ -267,6 +263,6 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     # minimize_example(args)
-
+"""
 if __name__ == "__main__":
     main()
