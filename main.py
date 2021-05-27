@@ -226,7 +226,7 @@ def main():
                         x["snr"] = snr
                     approximate_example(
                         args, approximate_function, TargetFunction8,
-                        option, f"Сontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
+                        option, f"Continuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
 """
     approximate_options91 = [

@@ -6,10 +6,8 @@ from utils.generate_data import generate_x
 from utils.utils import convert_variables, convert_variables_without_trainable
 
 
-x = generate_x(np.array([0, 0, 0, 0]), np.array([100, 100, 100, 100]), 200, 42)
-x_validate = generate_x(
-    np.array([0, 0, 0, 0]), np.array([100, 100, 100, 100]), 1, 41
-)
+x = [[y, y, y, y] for y in range(1, 101)]
+x_validate = [[y + 0.5, y + 0.5, y + 0.5, y + 0.5] for y in range(0, 100)]
 
 approximate_options8_1 = [
     {
@@ -19,7 +17,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -28,7 +26,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -37,7 +35,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -46,7 +44,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -55,7 +53,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -64,7 +62,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -73,7 +71,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -82,7 +80,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -91,7 +89,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.5),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -100,7 +98,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.5),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -109,7 +107,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.5),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -118,7 +116,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.5),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -127,7 +125,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.9),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -136,7 +134,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.9),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -145,7 +143,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.9),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -154,7 +152,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.9),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -163,7 +161,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -172,7 +170,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -181,7 +179,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -190,7 +188,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -199,7 +197,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -208,7 +206,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -217,7 +215,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.01),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -226,7 +224,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.001),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -235,7 +233,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -244,7 +242,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.1),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -253,7 +251,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.01),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
     {
         "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
@@ -262,7 +260,7 @@ approximate_options8_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.001),
         "eps": 0.0001,
-        "max_steps": 10,
+        "max_steps": 30,
     },
 ]
 """
