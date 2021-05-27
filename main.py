@@ -156,8 +156,8 @@ def main():
     all_snr = [None]
     losses = [
         [tf.keras.losses.MAE, "L_1"],
-        #        [rmse, "L_2"],
-        #        [L_inf, "L_inf"],
+        [rmse, "L_2"],
+        [L_inf, "L_inf"],
     ]
     approximate_options71 = [
         [approximate_options7_1, "WithoutNoise"],
@@ -193,7 +193,6 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-"""
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
         #[approximate_options8_1_white_noise, "WhiteNoise"],
@@ -229,6 +228,7 @@ def main():
                         args, approximate_function, TargetFunction8,
                         option, f"Сontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
+"""
     approximate_options91 = [
         [approximate_options9_1, "WithoutNoise"],
         #[approximate_options9_1_white_noise, "WhiteNoise"],
