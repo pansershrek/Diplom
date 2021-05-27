@@ -156,10 +156,11 @@ def main():
     args = parser.parse_args()
     all_snr = [None]
     losses = [
-        [L_inf, "L_inf"],
         [tf.keras.losses.MAE, "L_1"],
         [rmse, "L_2"],
+        [L_inf, "L_inf"],
     ]
+    """
     approximate_options71 = [
         [approximate_options7_1, "WithoutNoise"],
         #[approximate_options7_1_white_noise, "WhiteNoise"],
@@ -183,7 +184,6 @@ def main():
         #[approximate_options72, ApproximateFunction7_2, "Furie"],
         #[approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
-
     for loss, loss_name in losses:
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             for option, option_name in all_options:
@@ -267,6 +267,6 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     # minimize_example(args)
-"""
+
 if __name__ == "__main__":
     main()
