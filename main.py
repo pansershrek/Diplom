@@ -142,6 +142,7 @@ def approximate_example(args, f, target, opt, name=""):
 
 def main():
     tf.debugging.set_log_device_placement(True)
+    print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--ans', type=str, default="ans",
