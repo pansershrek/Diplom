@@ -141,6 +141,7 @@ def approximate_example(args, f, target, opt, name=""):
 
 
 def main():
+    tf.debugging.set_log_device_placement(True)
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--ans', type=str, default="ans",
