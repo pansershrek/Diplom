@@ -80,5 +80,6 @@ def rmse(a, b):
 
 
 def L_inf(a, b):
-    c = a - b
-    return np.max(c.numpy())
+    print(a, b)
+    c = [np.abs(x.numpy() - y.numpy()) for x, y in zip(a, b)]
+    return np.max(c)
