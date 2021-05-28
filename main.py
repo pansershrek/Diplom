@@ -127,7 +127,7 @@ def approximate_example(args, f, target, opt, name=""):
     result = proccess_approximate(
         f(), target(), opt
     )
-    with open(args.ans, "w") as file:
+    with open(args.ans, "a") as file:
         for x, y in zip(result.values(), metrix):
             x["result"].pop("history")
             new_result = {
