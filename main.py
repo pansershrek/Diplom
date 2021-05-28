@@ -178,7 +178,7 @@ def main():
         #[approximate_options7_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options7 = [
-        [approximate_options71, ApproximateFunction7_1, "Polinom"],
+        #[approximate_options71, ApproximateFunction7_1, "Polinom"],
         [approximate_options72, ApproximateFunction7_2, "Furie"],
         [approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
@@ -193,6 +193,7 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
+"""
     approximate_options81 = [
         [approximate_options8_1, "WithoutNoise"],
         #[approximate_options8_1_white_noise, "WhiteNoise"],
@@ -228,7 +229,7 @@ def main():
                         args, approximate_function, TargetFunction8,
                         option, f"Continuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-"""
+
     approximate_options91 = [
         [approximate_options9_1, "WithoutNoise"],
         #[approximate_options9_1_white_noise, "WhiteNoise"],
