@@ -6,12 +6,13 @@ from utils.generate_data import generate_x
 from utils.utils import convert_variables, convert_variables_without_trainable
 from utils.generate_data import generate_set
 
+from sklearn.datasets import load_boston
 
-X, y = generate_set(np.array([0, 0]), np.array([100, 100]), -100, 100, 300, 84)
+X, y = load_boston(return_X_y=True)
 
 x = X[:100]
-x_validate = X[100:]
-val = {str(k): v for k, v in zip(X, y)}
+x_validate = X[420:]
+
 
 approximate_options9_2 = [
     {

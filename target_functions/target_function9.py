@@ -12,10 +12,12 @@ from .base_class import BaseTargetFunction
 
 class TargetFunction9(BaseTargetFunction):
 
-    val = {}
+    def __init__(self):
+        self.val = {}
+        X, y = load_boston(return_X_y=True)
+        for k, v in zip(X, y):
+            self.val[str(convert_variables_without_trainable(k))] = v
 
     def __call__(self):
         """Сalculate function value"""
-        if self.x2y:
-            return self.x2y[str(get_numpy_array(self.x, 4))]
-        return self.val[str(list(get_numpy_array(self.x, 4)))]
+        return self.val[str(self.x)]
