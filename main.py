@@ -236,21 +236,21 @@ def main():
         #[approximate_options9_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options92 = [
-        #[approximate_options9_2, "WithoutNoise"],
+        [approximate_options9_2, "WithoutNoise"],
         #[approximate_options9_2_white_noise, "WhiteNoise"],
         #[approximate_options9_2_gaussian_noise, "GaussianNoise"],
         #[approximate_options9_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options93 = [
-        #[approximate_options9_3, "WithoutNoise"],
+        [approximate_options9_3, "WithoutNoise"],
         #[approximate_options9_3_white_noise, "WhiteNoise"],
         #[approximate_options9_3_gaussian_noise, "GaussianNoise"],
         #[approximate_options9_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options9 = [
         [approximate_options91, ApproximateFunction9_1, "Polinom"],
-        #[approximate_options92, ApproximateFunction9_2, "Furie"],
-        #[approximate_options93, ApproximateFunction9_3, "Exp"],
+        [approximate_options92, ApproximateFunction9_2, "Furie"],
+        [approximate_options93, ApproximateFunction9_3, "Exp"],
     ]
 
     for loss, loss_name in losses:
