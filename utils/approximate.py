@@ -33,6 +33,7 @@ def approximate(f, f_target, approximate_option):
     eps = approximate_option["eps"]
     max_steps = approximate_option.get("max_steps", 10**10)
     val = approximate_option.get("val", None)
+    """
     if val:
         f_target.val = val
     full_x = np.concatenate((np.array(var_list), np.array(var_list_validate)))
@@ -49,6 +50,7 @@ def approximate(f, f_target, approximate_option):
     )
     seed = approximate_option.get("seed", 42)
     noise_type = approximate_option.get("noise_type", "")
+    """
     """
     x2y = add_noise(
         full_x, full_y, noise_type, snr, mean,
