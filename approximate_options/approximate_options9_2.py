@@ -22,7 +22,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -32,7 +31,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -42,7 +40,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -52,7 +49,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -62,7 +58,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -72,7 +67,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -82,7 +76,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -92,7 +85,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -102,7 +94,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.5),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -112,7 +103,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.5),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -122,7 +112,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.5),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -132,7 +121,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.5),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -142,7 +130,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.9),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -152,7 +139,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.9),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -162,7 +148,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.9),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -172,7 +157,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.9),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -182,7 +166,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -192,7 +175,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=10000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -202,7 +184,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1000, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -212,7 +193,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100, momentum=0.5, nesterov=True),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -222,7 +202,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -232,7 +211,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -242,7 +220,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.01),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -252,7 +229,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adagrad(learning_rate=0.001),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -262,7 +238,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -272,7 +247,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.1),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -282,7 +256,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.01),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
     {
@@ -292,7 +265,6 @@ approximate_options9_2 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.Adam(learning_rate=0.001),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
 ]

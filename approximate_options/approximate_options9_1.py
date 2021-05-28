@@ -22,7 +22,6 @@ approximate_options9_1 = [
         "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=100000),
         "eps": 0.0001,
-        "val": val,
         "max_steps": 300,
     },
 ]
