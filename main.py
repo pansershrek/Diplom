@@ -159,7 +159,7 @@ def main():
         [rmse, "L_2"],
         [L_inf, "L_inf"],
     ]
-"""
+    """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
         #[approximate_options7_1_white_noise, "WhiteNoise"],
