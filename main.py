@@ -153,7 +153,7 @@ def main():
         help="Pathname to file with short answer"
     )
     args = parser.parse_args()
-    all_snr = [None]
+    all_snr = [100, 1000]
     losses = [
         [tf.keras.losses.MAE, "L_1"],
         [rmse, "L_2"],
