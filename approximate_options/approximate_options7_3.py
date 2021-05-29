@@ -263,14 +263,14 @@ approximate_options7_3 = [
         "max_steps": 30,
     },
 ]
-"""
+
 approximate_options7_3_white_noise = [
     copy.deepcopy(x) for x in approximate_options7_3
 ]
 for x in approximate_options7_3_white_noise:
     x["noise_type"] = "white_noise"
     x["seed"] = 42
-
+"""
 approximate_options7_3_gaussian_noise = [
     copy.deepcopy(x) for x in approximate_options7_3
 ]
