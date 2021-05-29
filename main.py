@@ -159,26 +159,26 @@ def main():
         [rmse, "L_2"],
         [L_inf, "L_inf"],
     ]
-    """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
-        #[approximate_options7_1_white_noise, "WhiteNoise"],
+        [approximate_options7_1_white_noise, "WhiteNoise"],
         #[approximate_options7_1_gaussian_noise, "GaussianNoise"],
         #[approximate_options7_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options72 = [
-        [approximate_options7_2, "WithoutNoise"],
-        #[approximate_options7_2_white_noise, "WhiteNoise"],
+        #[approximate_options7_2, "WithoutNoise"],
+        [approximate_options7_2_white_noise, "WhiteNoise"],
         #[approximate_options7_2_gaussian_noise, "GaussianNoise"],
         #[approximate_options7_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options73 = [
-        [approximate_options7_3, "WithoutNoise"],
-        #[approximate_options7_3_white_noise, "WhiteNoise"],
+        #[approximate_options7_3, "WithoutNoise"],
+        [approximate_options7_3_white_noise, "WhiteNoise"],
         #[approximate_options7_3_gaussian_noise, "GaussianNoise"],
         #[approximate_options7_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     all_approximate_options7 = [
+        [approximate_options71, ApproximateFunction7_1, "Polinom"],
         [approximate_options72, ApproximateFunction7_2, "Furie"],
         [approximate_options73, ApproximateFunction7_3, "Exp"],
     ]
@@ -194,20 +194,20 @@ def main():
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     approximate_options81 = [
-        [approximate_options8_1, "WithoutNoise"],
-        #[approximate_options8_1_white_noise, "WhiteNoise"],
+        #[approximate_options8_1, "WithoutNoise"],
+        [approximate_options8_1_white_noise, "WhiteNoise"],
         #[approximate_options8_1_gaussian_noise, "GaussianNoise"],
         #[approximate_options8_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options82 = [
-        [approximate_options8_2, "WithoutNoise"],
-        #[approximate_options8_2_white_noise, "WhiteNoise"],
+        #[approximate_options8_2, "WithoutNoise"],
+        [approximate_options8_2_white_noise, "WhiteNoise"],
         #[approximate_options8_2_gaussian_noise, "GaussianNoise"],
         #[approximate_options8_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options83 = [
-        [approximate_options8_3, "WithoutNoise"],
-        #[approximate_options8_3_white_noise, "WhiteNoise"],
+        #[approximate_options8_3, "WithoutNoise"],
+        [approximate_options8_3_white_noise, "WhiteNoise"],
         #[approximate_options8_3_gaussian_noise, "GaussianNoise"],
         #[approximate_options8_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
@@ -228,22 +228,21 @@ def main():
                         args, approximate_function, TargetFunction8,
                         option, f"Continuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-"""
     approximate_options91 = [
-        [approximate_options9_1, "WithoutNoise"],
-        #[approximate_options9_1_white_noise, "WhiteNoise"],
+        #[approximate_options9_1, "WithoutNoise"],
+        [approximate_options9_1_white_noise, "WhiteNoise"],
         #[approximate_options9_1_gaussian_noise, "GaussianNoise"],
         #[approximate_options9_1_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options92 = [
-        [approximate_options9_2, "WithoutNoise"],
-        #[approximate_options9_2_white_noise, "WhiteNoise"],
+        #[approximate_options9_2, "WithoutNoise"],
+        [approximate_options9_2_white_noise, "WhiteNoise"],
         #[approximate_options9_2_gaussian_noise, "GaussianNoise"],
         #[approximate_options9_2_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
     approximate_options93 = [
-        [approximate_options9_3, "WithoutNoise"],
-        #[approximate_options9_3_white_noise, "WhiteNoise"],
+        #[approximate_options9_3, "WithoutNoise"],
+        [approximate_options9_3_white_noise, "WhiteNoise"],
         #[approximate_options9_3_gaussian_noise, "GaussianNoise"],
         #[approximate_options9_3_salt_and_papper_noise, "SaltAndPapperNoise"],
     ]
