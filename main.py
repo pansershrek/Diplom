@@ -93,7 +93,6 @@ from minimize_functions.wolfe_function import WolfeFunction
 from minimize_functions.alpine_function import AlpineFunction
 from minimize_functions.schaffer_function import SchafferFunction
 from minimize_functions.brown_function import BrownFunction
-from minimize_functions.rastrigin_function import RastriginFunction
 from minimize_functions.schwefel_function import SchwefelFunction
 from minimize_functions.easom_function import EasomFunction
 from minimize_functions.brent_function import BrentFunction
