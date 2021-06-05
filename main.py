@@ -2,7 +2,7 @@ import argparse
 import logging
 import json
 import tensorflow as tf
-
+import math
 from utils.process import process_optimize, proccess_approximate
 from utils.utils import rmse, L_inf
 
@@ -86,6 +86,42 @@ from approximate_options.approximate_options9_2 import approximate_options9_2, a
 from approximate_options.approximate_options9_3 import approximate_options9_3, approximate_options9_3_white_noise
 
 
+from utils.utils import convert_variables
+
+from minimize_functions.xin_she_yang_function import XinSheYangFunction
+from minimize_functions.wolfe_function import WolfeFunction
+from minimize_functions.alpine_function import AlpineFunction
+from minimize_functions.schaffer_function import SchafferFunction
+from minimize_functions.brown_function import BrownFunction
+from minimize_functions.rastrigin_function import RastriginFunction
+from minimize_functions.schwefel_function import SchwefelFunction
+from minimize_functions.easom_function import EasomFunction
+from minimize_functions.brent_function import BrentFunction
+
+
+def get_metods(alphas):
+    methods = []
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.SGD(learning_rate=alpha))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.SGD(
+            learning_rate=alpha, momentum=0.1))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.SGD(
+            learning_rate=alpha, momentum=0.5))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.SGD(
+            learning_rate=alpha, momentum=0.9))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.SGD(
+            learning_rate=alpha, momentum=0.5, nesterov=True))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.Adagrad(learning_rate=alpha))
+    for alpha in alphas:
+        methods.append(tf.keras.optimizers.Adam(learning_rate=alpha))
+    return methods
+
+
 def minimize_example(args, f, opt):
     """Solve the minimization problem
 
@@ -95,6 +131,7 @@ def minimize_example(args, f, opt):
     result = process_optimize(
         f(), opt
     )
+    step = 1
     with open(args.ans, "w") as file:
         print(result, file=file)
     with open(args.short_ans, "w") as file:
@@ -105,6 +142,9 @@ def minimize_example(args, f, opt):
                 f'distance to min: {x["result"]["min_delta_result"]}, ' +
                 f'N steps: {x["result"]["steps_num"]}'
             )
+            if step % 21 == 0:
+                print("##################################")
+            step += 1
         print(result, file=file)
 
 metrix = [
@@ -134,7 +174,7 @@ def approximate_example(args, f, target, opt, name=""):
                 "Name": name,
                 "Val loss": str(x["result"]["loss_validate"]),
                 "Train loss": str(x["result"]["loss_min"]),
-                "metix": y,
+                "metrix": y,
             }
             print(json.dumps(new_result), flush=True)
             print(json.dumps(new_result), file=file, flush=True)
@@ -152,7 +192,9 @@ def main():
         '--short-ans', type=str, default="short_ans",
         help="Pathname to file with short answer"
     )
+
     args = parser.parse_args()
+    """
     all_snr = [100, 1000]
     losses = [
         [tf.keras.losses.MAE, "L_1"],
@@ -263,7 +305,150 @@ def main():
                         args, approximate_function, TargetFunction9,
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
-    # minimize_example(args)
+    """
+    alphas = [x / 1000.0 for x in range(1, 20)]
+    methods = get_metods(alphas)
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([-2, 2, 2]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("SchmittWettersFunction")
+    minimize_example(args, SchmittWettersFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([5, 5]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("McCormickFunction")
+    minimize_example(args, McCormickFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([math.pi, math.pi, math.pi, math.pi]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("XinSheYangFunction")
+    minimize_example(args, XinSheYangFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([1, 1, 1]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("WolfeFunction")
+    minimize_example(args, WolfeFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([1, 1, 1, 1, 1]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("AlpineFunction")
+    minimize_example(args, AlpineFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([10, 10]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("SchafferFunction")
+    minimize_example(args, SchafferFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([2, 2, 2, 2]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("BrownFunction")
+    minimize_example(args, BrownFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([350, 350, 350, 350, 350]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("SchwefelFunction")
+    minimize_example(args, SchwefelFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([350, 350, 350, 350, 350]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("EasomFunction")
+    minimize_example(args, EasomFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([3, 3]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 100,
+            },
+        )
+    print("BrentFunction")
+    minimize_example(args, BrentFunction, option)
+    print("\n\n", "!" * 30, "\n\n")
+
+    #approximate_example(args, ApproximateFunction5,TargetFunction5, approximate_options5, "Approx")
 
 if __name__ == "__main__":
     main()
