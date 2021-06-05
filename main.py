@@ -306,7 +306,7 @@ def main():
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
     """
-    alphas = [x / 1000.0 for x in range(1, 20)]
+    alphas = [x / 1000.0 for x in range(1, 21)]
     methods = get_metods(alphas)
     option = []
     for method in methods:
