@@ -423,7 +423,7 @@ def main():
     for method in methods:
         option.append(
             {
-                "x": convert_variables([350, 350, 350, 350, 350]),
+                "x": convert_variables([1, 1]),
                 "opt": method,
                 "eps": 0.0001,
                 "max_steps": 100,
