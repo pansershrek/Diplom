@@ -121,6 +121,23 @@ def get_metods(alphas):
     return methods
 
 
+def get_approximate_options(n, m, methods, losses):
+    x = [[y] * m for y in range(1, 101)]
+    x_validate = [[y + 0.5] * m for y in range(0, 100)]
+    options = []
+    for method in methods:
+        option.append({
+            "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
+            "x_validate": [convert_variables_without_trainable(x_tmp) for x_tmp in x_validate],
+            "params": convert_variables([5 for x in range(n)]),
+            "loss_function": losses,
+            "opt": method,
+            "eps": 0.0001,
+            "max_steps": 30,
+        })
+    return options
+
+
 def minimize_example(args, f, opt):
     """Solve the minimization problem
 
@@ -146,14 +163,24 @@ def minimize_example(args, f, opt):
             step += 1
         print(result, file=file)
 
+# metrix = [
+#    "SGD(1)", "SGD(0.1)", "SGD(0.01)", "SGD(0.001)",
+#    "SGDM(1,0.1)", "SGDM(0.1,0.1)", "SGDM(0.01,0.1)", "SGDM(0.001,0.1)",
+#    "SGDM(1,0.5)", "SGDM(0.1,0.5)", "SGDM(0.01,0.5)", "SGDM(0.001,0.5)",
+#    "SGDM(1,0.9)", "SGDM(0.1,0.9)", "SGDM(0.01,0.9)", "SGDM(0.001,0.9)",
+#    "Nesterov(1,0.5)", "Nesterov(0.1,0.5)", "Nesterov(0.01,0.5)", "Nesterov(0.001,0.5)",
+#    "Adagrad(1)", "Adagrad(0.1)", "Adagrad(0.01)", "Adagrad(0.001)",
+#    "Adam(1)", "Adam(0.1)", "Adam(0.01)", "Adam(0.001)",
+#]
+
 metrix = [
-    "SGD(1)", "SGD(0.1)", "SGD(0.01)", "SGD(0.001)",
-    "SGDM(1,0.1)", "SGDM(0.1,0.1)", "SGDM(0.01,0.1)", "SGDM(0.001,0.1)",
-    "SGDM(1,0.5)", "SGDM(0.1,0.5)", "SGDM(0.01,0.5)", "SGDM(0.001,0.5)",
-    "SGDM(1,0.9)", "SGDM(0.1,0.9)", "SGDM(0.01,0.9)", "SGDM(0.001,0.9)",
-    "Nesterov(1,0.5)", "Nesterov(0.1,0.5)", "Nesterov(0.01,0.5)", "Nesterov(0.001,0.5)",
-    "Adagrad(1)", "Adagrad(0.1)", "Adagrad(0.01)", "Adagrad(0.001)",
-    "Adam(1)", "Adam(0.1)", "Adam(0.01)", "Adam(0.001)",
+    "SGD(1000)", "SGD(100)", "SGD(10)", "SGD(1)", "SGD(0.1)", "SGD(0.01)", "SGD(0.001)", "SGD(0.0001)",
+    "SGDM(1000,0.1)", "SGDM(100,0.1)", "SGDM(10,0.1)", "SGDM(1,0.1)", "SGDM(0.1,0.1)", "SGDM(0.01,0.1)", "SGDM(0.001,0.1)", "SGDM(0.0001,0.1)",
+    "SGDM(1000,0.5)", "SGDM(100,0.5)", "SGDM(10,0.5)", "SGDM(1,0.5)", "SGDM(0.1,0.5)", "SGDM(0.01,0.5)", "SGDM(0.001,0.5)", "SGDM(0.0001,0.5)",
+    "SGDM(1000,0.9)", "SGDM(100,0.9)", "SGDM(10,0.9)", "SGDM(1,0.9)", "SGDM(0.1,0.9)", "SGDM(0.01,0.9)", "SGDM(0.001,0.9)", "SGDM(0.0001,0.9)",
+    "Nesterov(1000,0.5)", "Nesterov(100,0.5)", "Nesterov(10,0.5)", "Nesterov(1,0.5)", "Nesterov(0.1,0.5)", "Nesterov(0.01,0.5)", "Nesterov(0.001,0.5)", "Nesterov(0.0001,0.5)",
+    "Adagrad(1000)", "Adagrad(100)", "Adagrad(10)", "Adagrad(1)", "Adagrad(0.1)", "Adagrad(0.01)", "Adagrad(0.001)", "Adagrad(0.0001)",
+    "Adam(1000)", "Adam(100)", "Adam(10)", "Adam(1)", "Adam(0.1)", "Adam(0.01)", "Adam(0.001)", "Adam(0.0001)",
 ]
 
 
@@ -193,13 +220,32 @@ def main():
     )
 
     args = parser.parse_args()
-    """
-    all_snr = [100, 1000]
+
+    alphas = [1000.0 / 10**x for x in range(8)]
+    methods = get_metods(alphas)
+
     losses = [
         [tf.keras.losses.MAE, "L_1"],
         [rmse, "L_2"],
         [L_inf, "L_inf"],
     ]
+
+    for loss, loss_name in losses:
+        all_approximate_options7 = [
+            [[get_approximate_options(
+                10, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
+            [[get_approximate_options(
+                61, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
+            [[get_approximate_options(
+                19, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
+        ]
+        for all_options, approximate_function, approximate_function_name in all_approximate_options7:
+            for option, option_name in all_options:
+                approximate_example(
+                    args, approximate_function, TargetFunction7,
+                    option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
+                )
+    """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
         [approximate_options7_1_white_noise, "WhiteNoise"],
@@ -234,6 +280,8 @@ def main():
                         args, approximate_function, TargetFunction7,
                         option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
+    """
+    """
     approximate_options81 = [
         #[approximate_options8_1, "WithoutNoise"],
         [approximate_options8_1_white_noise, "WhiteNoise"],
@@ -304,6 +352,7 @@ def main():
                         args, approximate_function, TargetFunction9,
                         option, f"Discontinuous_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
                     )
+    """
     """
     alphas = [x / 1000.0 for x in range(1, 21)]
     methods = get_metods(alphas)
@@ -446,7 +495,7 @@ def main():
     print("BrentFunction")
     minimize_example(args, BrentFunction, option)
     print("\n\n", "!" * 30, "\n\n")
-
+    """
     #approximate_example(args, ApproximateFunction5,TargetFunction5, approximate_options5, "Approx")
 
 if __name__ == "__main__":
