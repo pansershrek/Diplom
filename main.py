@@ -100,6 +100,9 @@ from minimize_functions.brent_function import BrentFunction
 from utils.utils import convert_variables, convert_variables_without_trainable
 
 
+from sklearn.datasets import load_boston
+
+
 def get_metods(alphas):
     methods = []
     for alpha in alphas:
@@ -124,8 +127,10 @@ def get_metods(alphas):
 
 
 def get_approximate_options(n, m, methods, losses):
-    x = [[y] * m for y in range(1, 101)]
-    x_validate = [[y + 0.5] * m for y in range(0, 100)]
+    X, y = load_boston(return_X_y=True)
+
+    x = X[:100]
+    x_validate = X[420:]
     options = []
     for method in methods:
         options.append({
