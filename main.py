@@ -235,16 +235,16 @@ def main():
     for loss, loss_name in losses:
         all_approximate_options7 = [
             [[get_approximate_options(
-                17, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_1, "Polinom"],
+                53, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_1, "Polinom"],
             [[get_approximate_options(
-                81, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_2, "Furie"],
+                261, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_2, "Furie"],
             [[get_approximate_options(
-                25, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_3, "Exp"],
+                79, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             option, option_name = all_options
             approximate_example(
-                args, approximate_function, TargetFunction8,
+                args, approximate_function, TargetFunction9,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
     """
