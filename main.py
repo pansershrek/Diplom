@@ -126,7 +126,7 @@ def get_approximate_options(n, m, methods, losses):
     x_validate = [[y + 0.5] * m for y in range(0, 100)]
     options = []
     for method in methods:
-        option.append({
+        options.append({
             "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
             "x_validate": [convert_variables_without_trainable(x_tmp) for x_tmp in x_validate],
             "params": convert_variables([5 for x in range(n)]),
