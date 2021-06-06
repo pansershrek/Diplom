@@ -242,11 +242,11 @@ def main():
                 19, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
-            for option, option_name in all_options:
-                approximate_example(
-                    args, approximate_function, TargetFunction7,
-                    option, f"Smoth_{snr}_{loss_name}_{approximate_function_name}_{option_name}"
-                )
+            option, option_name = all_options
+            approximate_example(
+                args, approximate_function, TargetFunction7,
+                option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
+            )
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
