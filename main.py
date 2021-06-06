@@ -97,6 +97,8 @@ from minimize_functions.schwefel_function import SchwefelFunction
 from minimize_functions.easom_function import EasomFunction
 from minimize_functions.brent_function import BrentFunction
 
+from utils.utils import convert_variables, convert_variables_without_trainable
+
 
 def get_metods(alphas):
     methods = []
