@@ -71,7 +71,7 @@ from approximate_options.approximate_options7_3 import approximate_options7_3, a
 from approximate_functions.approximate_function8_1 import ApproximateFunction8_1
 from approximate_functions.approximate_function8_2 import ApproximateFunction8_2
 from approximate_functions.approximate_function8_3 import ApproximateFunction8_3
-from target_functions.target_function8 import TargetFunction8
+from target_functions.target_function8 import TargetFunction8, TargetFunction8_2
 from approximate_options.approximate_options8_1 import approximate_options8_1, approximate_options8_1_white_noise
 from approximate_options.approximate_options8_2 import approximate_options8_2, approximate_options8_2_white_noise
 from approximate_options.approximate_options8_3 import approximate_options8_3, approximate_options8_3_white_noise
@@ -127,10 +127,12 @@ def get_metods(alphas):
 
 
 def get_approximate_options(n, m, methods, losses):
-    X, y = load_boston(return_X_y=True)
+    #X, y = load_boston(return_X_y=True)
 
-    x = X[:100]
-    x_validate = X[420:]
+    #x = X[:100]
+    #x_validate = X[420:]
+    x = [[y] * m for y in range(1, 101)]
+    x_validate = [[y + 0.5] * m for y in range(0, 100)]
     options = []
     for method in methods:
         options.append({
@@ -140,7 +142,7 @@ def get_approximate_options(n, m, methods, losses):
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 30,
+            "max_steps": 20,
         })
     return options
 
@@ -165,8 +167,8 @@ def minimize_example(args, f, opt):
                 f'distance to min: {x["result"]["min_delta_result"]}, ' +
                 f'N steps: {x["result"]["steps_num"]}'
             )
-            if step % 21 == 0:
-                print("##################################")
+            # if step % 21 == 0:
+            #    print("##################################")
             step += 1
         print(result, file=file)
 
@@ -240,18 +242,19 @@ def main():
     for loss, loss_name in losses:
         all_approximate_options7 = [
             [[get_approximate_options(
-                53, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_1, "Polinom"],
+                17, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_1, "Polinom"],
             [[get_approximate_options(
-                261, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_2, "Furie"],
+                81, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_2, "Furie"],
             [[get_approximate_options(
-                79, 13, methods, loss), "WithoutNoise"], ApproximateFunction9_3, "Exp"],
+                25, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             option, option_name = all_options
             approximate_example(
-                args, approximate_function, TargetFunction9,
+                args, approximate_function, TargetFunction8_2,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
+
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
@@ -362,8 +365,12 @@ def main():
     """
     """
     alphas = [x / 1000.0 for x in range(1, 21)]
+    print(len(alphas))
+    print(alphas)
     methods = get_metods(alphas)
     option = []
+    print(len(methods))
+    return 0
     for method in methods:
         option.append(
             {
@@ -376,7 +383,8 @@ def main():
     print("SchmittWettersFunction")
     minimize_example(args, SchmittWettersFunction, option)
     print("\n\n", "!" * 30, "\n\n")
-
+    """
+    """
     option = []
     for method in methods:
         option.append(
