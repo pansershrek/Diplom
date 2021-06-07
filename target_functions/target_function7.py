@@ -13,12 +13,23 @@ class TargetFunction7(BaseTargetFunction):
         if self.x2y:
             return self.x2y[str(get_numpy_array(self.x))]
         return (
-            self.x[0]**2 + self.x[1]**2
+            self.x[0]**2 + self.x[1]**2 + self.x[2]
             - tf.sin((self.x[2]) * math.pi / 180)
         )
 
 
 class TargetFunction7_1(BaseTargetFunction):
+
+    def __call__(self):
+        """Сalculate function value"""
+        if self.x2y:
+            return self.x2y[str(get_numpy_array(self.x))]
+        return (
+            tf.math.exp(self.x[0] + self.x[1]**2) + self.x[2]**4
+        )
+
+
+class TargetFunction7_2(BaseTargetFunction):
 
     def __call__(self):
         """Сalculate function value"""
