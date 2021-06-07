@@ -21,4 +21,4 @@ class TargetFunction8_2(BaseTargetFunction):
         """Сalculate function value"""
         if self.x2y:
             return self.x2y[str(get_numpy_array(self.x))]
-        return (math.e**(tf.sin(self.x[0] * math.pi / 180) + self.x[1]) + self.x[2]**4 - 16 * self.x[0] * self.x[1] * self.x[2])
+        return (-tf.sin(self.x[0] * math.pi / 180) + self.x[2]**4 - 16 * self.x[0] * self.x[1] * self.x[2])
