@@ -247,11 +247,11 @@ def main():
     for loss, loss_name in losses:
         all_approximate_options7 = [
             [[get_approximate_options(
-                41, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
+                41, 10, methods, loss), "WithoutNoise"], ApproximateFunction9_1, "Polinom"],
             [[get_approximate_options(
-                201, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
+                201, 10, methods, loss), "WithoutNoise"], ApproximateFunction9_2, "Furie"],
             [[get_approximate_options(
-                61, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
+                61, 10, methods, loss), "WithoutNoise"], ApproximateFunction9_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             option, option_name = all_options
