@@ -25,6 +25,6 @@ class TargetFunction7_1(BaseTargetFunction):
         if self.x2y:
             return self.x2y[str(get_numpy_array(self.x))]
         return (
-            - self.x[0] * self.x[1]
+            - self.x[0] * self.x[1] +
             tf.sin((self.x[2]) * math.pi / 180) + self.x[2]**4
         )
