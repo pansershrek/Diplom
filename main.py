@@ -80,7 +80,7 @@ from approximate_options.approximate_options8_3 import approximate_options8_3, a
 from approximate_functions.approximate_function9_1 import ApproximateFunction9_1
 from approximate_functions.approximate_function9_2 import ApproximateFunction9_2
 from approximate_functions.approximate_function9_3 import ApproximateFunction9_3
-from target_functions.target_function9 import TargetFunction9
+from target_functions.target_function9 import TargetFunction9, TargetFunction9_1
 from approximate_options.approximate_options9_1 import approximate_options9_1, approximate_options9_1_white_noise
 from approximate_options.approximate_options9_2 import approximate_options9_2, approximate_options9_2_white_noise
 from approximate_options.approximate_options9_3 import approximate_options9_3, approximate_options9_3_white_noise
@@ -101,6 +101,7 @@ from utils.utils import convert_variables, convert_variables_without_trainable
 
 
 from sklearn.datasets import load_boston
+from sklearn.datasets import load_diabetes
 
 
 def get_metods(alphas):
@@ -131,8 +132,12 @@ def get_approximate_options(n, m, methods, losses):
 
     #x = X[:100]
     #x_validate = X[420:]
-    x = [[y] * m for y in range(1, 101)]
-    x_validate = [[y + 0.5] * m for y in range(0, 100)]
+    #x = [[y] * m for y in range(1, 101)]
+    #x_validate = [[y + 0.5] * m for y in range(0, 100)]
+    X, y = load_diabetes(return_X_y=True)
+
+    x = X[:50]
+    x_validate = X[400:]
     options = []
     for method in methods:
         options.append({
@@ -142,7 +147,7 @@ def get_approximate_options(n, m, methods, losses):
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 20,
+            "max_steps": 10,
         })
     return options
 
@@ -242,16 +247,16 @@ def main():
     for loss, loss_name in losses:
         all_approximate_options7 = [
             [[get_approximate_options(
-                10, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
+                41, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
             [[get_approximate_options(
-                61, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
+                201, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
             [[get_approximate_options(
-                19, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
+                61, 10, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             option, option_name = all_options
             approximate_example(
-                args, approximate_function, TargetFunction7_1,
+                args, approximate_function, TargetFunction9_1,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
 
