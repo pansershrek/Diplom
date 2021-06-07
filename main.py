@@ -63,7 +63,7 @@ from approximate_options.approximate_options6 import approximate_options6
 from approximate_functions.approximate_function7_1 import ApproximateFunction7_1
 from approximate_functions.approximate_function7_2 import ApproximateFunction7_2
 from approximate_functions.approximate_function7_3 import ApproximateFunction7_3
-from target_functions.target_function7 import TargetFunction7
+from target_functions.target_function7 import TargetFunction7, TargetFunction7_1
 from approximate_options.approximate_options7_1 import approximate_options7_1, approximate_options7_1_white_noise
 from approximate_options.approximate_options7_2 import approximate_options7_2, approximate_options7_2_white_noise
 from approximate_options.approximate_options7_3 import approximate_options7_3, approximate_options7_3_white_noise
@@ -242,16 +242,16 @@ def main():
     for loss, loss_name in losses:
         all_approximate_options7 = [
             [[get_approximate_options(
-                17, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_1, "Polinom"],
+                10, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
             [[get_approximate_options(
-                81, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_2, "Furie"],
+                61, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
             [[get_approximate_options(
-                25, 4, methods, loss), "WithoutNoise"], ApproximateFunction8_3, "Exp"],
+                19, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
         ]
         for all_options, approximate_function, approximate_function_name in all_approximate_options7:
             option, option_name = all_options
             approximate_example(
-                args, approximate_function, TargetFunction8_2,
+                args, approximate_function, TargetFunction7_1,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
 
