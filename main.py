@@ -260,7 +260,7 @@ def main():
                         "x": convert_variables([x for x in x_cur]),
                         "opt": method,
                         "eps": 0.0001,
-                        "max_steps": 3,
+                        "max_steps": 100,
                     },
                 )
             res[f"{fname}|{x_cur}"] = minimize_example(args, f, option)
