@@ -264,7 +264,6 @@ def main():
                     },
                 )
             res[f"{fname}|{x_cur}"] = minimize_example(args, f, option)
-            break
     import sys
     print(json.dumps(res), file=sys.stderr, flush=True)
 
