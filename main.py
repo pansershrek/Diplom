@@ -103,6 +103,10 @@ from utils.utils import convert_variables, convert_variables_without_trainable
 from sklearn.datasets import load_boston
 from sklearn.datasets import load_diabetes
 
+from minimize_functions.namy_funct import funct_dict
+
+import numpy as np
+
 
 def get_metods(alphas):
     methods = []
@@ -164,6 +168,7 @@ def minimize_example(args, f, opt):
         f(), opt
     )
     step = 1
+    res = []
     with open(args.ans, "w") as file:
         print(result, file=file)
     with open(args.short_ans, "w") as file:
@@ -174,10 +179,12 @@ def minimize_example(args, f, opt):
                 f'distance to min: {x["result"]["min_delta_result"]}, ' +
                 f'N steps: {x["result"]["steps_num"]}'
             )
+            res.append(f'X value: {x["result"]["x_min"]}, ' + f'distance to min: {x["result"]["min_delta_result"]}, ' + f'N steps: {x["result"]["steps_num"]}')
             # if step % 21 == 0:
             #    print("##################################")
             step += 1
         print(result, file=file)
+    return res
 
 # metrix = [
 #    "SGD(1)", "SGD(0.1)", "SGD(0.01)", "SGD(0.001)",
@@ -234,9 +241,57 @@ def main():
         '--short-ans', type=str, default="short_ans",
         help="Pathname to file with short answer"
     )
-
     args = parser.parse_args()
+    alphas = [0.0001 * (10**0.5)**x for x in range(15)]
+    methods = get_metods(alphas)
 
+    res = {}
+    for fname, f in funct_dict.items():
+        x_shape = len(f.get_minimum()[0])
+        x_min = np.array([float(x) for x in f.get_minimum()[0]])
+        x_range = [
+            200 * np.random.random_sample(x_shape) + (x_min - 100) for y in range(20)
+        ]
+        for x_cur in x_range:
+            option = []
+            for method in methods:
+                option.append(
+                    {
+                        "x": convert_variables([x for x in x_cur]),
+                        "opt": method,
+                        "eps": 0.0001,
+                        "max_steps": 3,
+                    },
+                )
+            res[f"{fname}|{x_cur}"] = minimize_example(args, f, option)
+            break
+    import sys
+    print(json.dumps(res), file=sys.stderr, flush=True)
+
+    """
+    with open("asdad.py", "r") as f:
+        fff = json.load(f)
+    for x in fff:
+        exec(fff[x]['code'])
+    fff["axis_parallel_hyper_ellipsisoid_fnc"]
+    x = eval("axis_parallel_hyper_ellipsisoid_fnc")
+
+    alphas = [x / 1000.0 for x in range(1, 21)]
+    methods = get_metods(alphas)
+    option = []
+    for method in methods:
+        option.append(
+            {
+                "x": convert_variables([-2, 2]),
+                "opt": method,
+                "eps": 0.0001,
+                "max_steps": 10,
+            },
+        )
+    print("axis_parallel_hyper_ellipsisoid_fnc")
+    minimize_example(args, eval("axis_parallel_hyper_ellipsisoid_fnc"), option)
+    """
+    """
     alphas = [1000.0 / 10**x for x in range(8)]
     methods = get_metods(alphas)
 
@@ -261,7 +316,7 @@ def main():
                 args, approximate_function, TargetFunction7_1,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
-
+    """
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
