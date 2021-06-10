@@ -16,8 +16,8 @@ class ApproximateFunction7_2(BaseApproximateFunction):
         :type params: list
         """
         result = 0
-        for ind in range(len(self.P)):
-            for p in range(0, 10):
+        for ind in range(len(self.x)):
+            for p in range(0, self.P):
                 result += params[ind * 10 * 2 + 2 * p] * \
                     tf.sin((self.x[ind] * (p + 1)) * math.pi / 180)
                 result += params[ind * 10 * 2 + 2 * p + 1] * \

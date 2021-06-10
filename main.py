@@ -214,7 +214,7 @@ def approximate_example(args, f, target, opt, name=""):
     :type args: argparse.Namespace
     """
     result = proccess_approximate(
-        f(), target, opt
+        f(), target(), opt
     )
     with open(args.ans, "a") as file:
         for x, y in zip(result.values(), metrix):
@@ -301,13 +301,13 @@ def main():
     ]
 
     for loss, loss_name in losses:
-        for p in [[5, 10, 3]]:
+        for p in [[4, 10, 3]]:
             a7_1 = ApproximateFunction7_1()
             a7_2 = ApproximateFunction7_2()
             a7_3 = ApproximateFunction7_3()
-            a7_1.P = p[0]
-            a7_1.P = p[1]
-            a7_3.P = p[2]
+            #a7_1.P = p[0]
+            #a7_1.P = p[1]
+            #a7_3.P = p[2]
             all_approximate_options7 = [
                 [[get_approximate_options(
                     3 * (p[0] - 1) + 1, 3, methods, loss), "WithoutNoise"], a7_1, "Polinom"],
