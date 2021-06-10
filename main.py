@@ -214,7 +214,7 @@ def approximate_example(args, f, target, opt, name=""):
     :type args: argparse.Namespace
     """
     result = proccess_approximate(
-        f(), target(), opt
+        f(), target, opt
     )
     with open(args.ans, "a") as file:
         for x, y in zip(result.values(), metrix):
@@ -301,20 +301,27 @@ def main():
     ]
 
     for loss, loss_name in losses:
-        all_approximate_options7 = [
-            [[get_approximate_options(
-                10, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_1, "Polinom"],
-            [[get_approximate_options(
-                61, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_2, "Furie"],
-            [[get_approximate_options(
-                19, 3, methods, loss), "WithoutNoise"], ApproximateFunction7_3, "Exp"],
-        ]
-        for all_options, approximate_function, approximate_function_name in all_approximate_options7:
-            option, option_name = all_options
-            approximate_example(
-                args, approximate_function, TargetFunction7_1,
-                option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
-            )
+        for p in [[5, 10, 3]]:
+            a7_1 = ApproximateFunction7_1()
+            a7_2 = ApproximateFunction7_2()
+            a7_3 = ApproximateFunction7_3()
+            a7_1.P = p[0]
+            a7_1.P = p[1]
+            a7_3.P = p[2]
+            all_approximate_options7 = [
+                [[get_approximate_options(
+                    3 * (p[0] - 1) + 1, 3, methods, loss), "WithoutNoise"], a7_1, "Polinom"],
+                [[get_approximate_options(
+                    3 * (p[1] * 2) + 1, 3, methods, loss), "WithoutNoise"], a7_2, "Furie"],
+                [[get_approximate_options(
+                    3 * (p[2] * 2) + 1, 3, methods, loss), "WithoutNoise"], a7_3, "Exp"],
+            ]
+            for all_options, approximate_function, approximate_function_name in all_approximate_options7:
+                option, option_name = all_options
+                approximate_example(
+                    args, approximate_function, TargetFunction7_1,
+                    option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
+                )
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
