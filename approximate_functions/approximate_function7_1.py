@@ -17,7 +17,7 @@ class ApproximateFunction7_1(BaseApproximateFunction):
         """
         result = 0
         for ind in range(len(self.x)):
-            for p in range(1, self.P):
-                result += params[ind * 3 + p - 1] * self.x[ind]**p
+            for p in range(0, self.P):
+                result += params[ind * self.P + p] * self.x[ind]**p
         result += params[-1]
         return result

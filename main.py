@@ -308,13 +308,14 @@ def main():
             a7_1 = ApproximateFunction7_1
             a7_2 = ApproximateFunction7_2
             a7_3 = ApproximateFunction7_3
+            x_len = 3
             all_approximate_options7 = [
                 [[get_approximate_options(
-                    3 * (p[0] - 1) + 1, 3, methods, loss), "WithoutNoise"], a7_1, "Polinom"],
+                    x_len * p[0] + 1, x_len, methods, loss), "WithoutNoise"], a7_1, "Polinom"],
                 [[get_approximate_options(
-                    3 * (p[1] * 2) + 1, 3, methods, loss), "WithoutNoise"], a7_2, "Furie"],
+                    x_len * (p[1] * 2) + 1, x_len, methods, loss), "WithoutNoise"], a7_2, "Furie"],
                 [[get_approximate_options(
-                    3 * (p[2] * 2) + 1, 3, methods, loss), "WithoutNoise"], a7_3, "Exp"],
+                    x_len * (p[2] * 2) + 1, x_len, methods, loss), "WithoutNoise"], a7_3, "Exp"],
             ]
             for all_options, approximate_function, approximate_function_name in all_approximate_options7:
                 option, option_name = all_options

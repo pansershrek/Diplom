@@ -18,7 +18,8 @@ class ApproximateFunction7_3(BaseApproximateFunction):
         result = 0
         for ind in range(len(self.x)):
             for p in range(0, self.P):
-                result += params[ind * 6 + 2 * p] * \
-                    tf.math.exp(params[ind * 6 + 2 * p + 1]) * self.x[ind]
+                result += params[ind * self.P * 2 + 2 * p] * \
+                    tf.math.exp(
+                        params[ind * self.P * 2 + 2 * p + 1]) * self.x[ind]
         result += params[-1]
         return result
