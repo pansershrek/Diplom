@@ -214,7 +214,7 @@ def approximate_example(args, f, target, opt, name=""):
     :type args: argparse.Namespace
     """
     result = proccess_approximate(
-        f(), target(), opt
+        f(), target, opt
     )
     with open(args.ans, "a") as file:
         for x, y in zip(result.values(), metrix):
