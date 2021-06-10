@@ -320,7 +320,7 @@ def main():
             for all_options, approximate_function, approximate_function_name in all_approximate_options7:
                 option, option_name = all_options
                 approximate_example(
-                    args, approximate_function, TargetFunction7_1,
+                    args, approximate_function, TargetFunction7,
                     option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
                 )
     """
