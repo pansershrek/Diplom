@@ -242,6 +242,7 @@ def main():
         help="Pathname to file with short answer"
     )
     args = parser.parse_args()
+    """
     alphas = [0.0001 * (10**0.5)**x for x in range(15)]
     methods = get_metods(alphas)
 
@@ -266,7 +267,7 @@ def main():
             res[f"{fname}|{x_cur}"] = minimize_example(args, f, option)
     import sys
     print(json.dumps(res), file=sys.stderr, flush=True)
-
+    """
     """
     with open("asdad.py", "r") as f:
         fff = json.load(f)
@@ -289,7 +290,6 @@ def main():
         )
     print("axis_parallel_hyper_ellipsisoid_fnc")
     minimize_example(args, eval("axis_parallel_hyper_ellipsisoid_fnc"), option)
-    """
     """
     alphas = [1000.0 / 10**x for x in range(8)]
     methods = get_metods(alphas)
@@ -315,7 +315,6 @@ def main():
                 args, approximate_function, TargetFunction7_1,
                 option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
             )
-    """
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],

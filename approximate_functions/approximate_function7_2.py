@@ -7,6 +7,8 @@ from .base_class import BaseApproximateFunction
 
 class ApproximateFunction7_2(BaseApproximateFunction):
 
+    P = 10
+
     def __call__(self, params):
         """Сalculate function value with params
 
@@ -14,7 +16,7 @@ class ApproximateFunction7_2(BaseApproximateFunction):
         :type params: list
         """
         result = 0
-        for ind in range(len(self.x)):
+        for ind in range(len(self.P)):
             for p in range(0, 10):
                 result += params[ind * 10 * 2 + 2 * p] * \
                     tf.sin((self.x[ind] * (p + 1)) * math.pi / 180)

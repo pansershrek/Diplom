@@ -7,6 +7,8 @@ from .base_class import BaseApproximateFunction
 
 class ApproximateFunction7_1(BaseApproximateFunction):
 
+    P = 5
+
     def __call__(self, params):
         """Сalculate function value with params
 
@@ -15,7 +17,7 @@ class ApproximateFunction7_1(BaseApproximateFunction):
         """
         result = 0
         for ind in range(len(self.x)):
-            for p in range(1, 4):
+            for p in range(1, self.P):
                 result += params[ind * 3 + p - 1] * self.x[ind]**p
         result += params[-1]
         return result
