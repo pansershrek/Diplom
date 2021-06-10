@@ -149,11 +149,11 @@ def get_approximate_options(n, m, methods, losses):
         options.append({
             "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
             "x_validate": [convert_variables_without_trainable(x_tmp) for x_tmp in x_validate],
-            "params": convert_variables([5 for x in range(n)]),
+            "params": convert_variables([1 for x in range(n)]),
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 1,
+            "max_steps": 3,
         })
     return options
 
@@ -301,7 +301,7 @@ def main():
     ]
 
     for loss, loss_name in losses:
-        for p in [[4, 10, 3]]:
+        for p in [[5, 10, 3]]:
             ApproximateFunction7_1.P = p[0]
             ApproximateFunction7_2.P = p[1]
             ApproximateFunction7_3.P = p[2]
