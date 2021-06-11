@@ -222,7 +222,7 @@ def approximate_example(args, f, target, opt, name=""):
         for x, y in zip(result.values(), metrix):
             x["result"].pop("history")
             new_result = {
-                "Name": name,
+                "Name": f"{name}_{target.P}",
                 "Val loss": str(x["result"]["loss_validate"]),
                 "Train loss": str(x["result"]["loss_min"]),
                 "metrix": y,
@@ -305,7 +305,7 @@ def main():
     ]
 
     for loss, loss_name in losses:
-        for p in [[4 + x, 2 + x, 2 + x] for x in range(0, 1)]:
+        for p in [[4 + x, 2 + x, 2 + x] for x in range(0, 10)]:
             ApproximateFunction7_1.P = p[0]
             ApproximateFunction7_2.P = p[1]
             ApproximateFunction7_3.P = p[2]
