@@ -154,7 +154,7 @@ def get_approximate_options(n, m, methods, losses):
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 1,
+            "max_steps": 100,
         })
     return options
 
