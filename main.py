@@ -154,7 +154,7 @@ def get_approximate_options(n, m, methods, losses):
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 20,
+            "max_steps": 1,
         })
     return options
 
@@ -222,7 +222,7 @@ def approximate_example(args, f, target, opt, name=""):
         for x, y in zip(result.values(), metrix):
             x["result"].pop("history")
             new_result = {
-                "Name": f"{name}_{target.P}",
+                "Name": f"{name}_{f.P}",
                 "Val loss": str(x["result"]["loss_validate"]),
                 "Train loss": str(x["result"]["loss_min"]),
                 "metrix": y,
