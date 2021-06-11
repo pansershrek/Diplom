@@ -3,6 +3,7 @@ import logging
 import json
 import tensorflow as tf
 import math
+import os
 from utils.process import process_optimize, proccess_approximate
 from utils.utils import rmse, L_inf
 
@@ -153,7 +154,7 @@ def get_approximate_options(n, m, methods, losses):
             "loss_function": losses,
             "opt": method,
             "eps": 0.0001,
-            "max_steps": 3,
+            "max_steps": 20,
         })
     return options
 
@@ -216,6 +217,7 @@ def approximate_example(args, f, target, opt, name=""):
     result = proccess_approximate(
         f(), target(), opt
     )
+    res = []
     with open(args.ans, "a") as file:
         for x, y in zip(result.values(), metrix):
             x["result"].pop("history")
@@ -225,8 +227,10 @@ def approximate_example(args, f, target, opt, name=""):
                 "Train loss": str(x["result"]["loss_min"]),
                 "metrix": y,
             }
-            print(json.dumps(new_result), flush=True)
-            print(json.dumps(new_result), file=file, flush=True)
+            #print(json.dumps(new_result), flush=True)
+            res.append(json.dumps(new_result))
+            #print(json.dumps(new_result), file=file, flush=True)
+    return res
 
 
 def main():
@@ -301,7 +305,7 @@ def main():
     ]
 
     for loss, loss_name in losses:
-        for p in [[5, 10, 3]]:
+        for p in [[4 + x, 2 + x, 2 + x] for x in range(0, 1)]:
             ApproximateFunction7_1.P = p[0]
             ApproximateFunction7_2.P = p[1]
             ApproximateFunction7_3.P = p[2]
@@ -319,10 +323,16 @@ def main():
             ]
             for all_options, approximate_function, approximate_function_name in all_approximate_options7:
                 option, option_name = all_options
-                approximate_example(
+                pid = os.fork()
+                if pid != 0:
+                    continue
+                res = approximate_example(
                     args, approximate_function, TargetFunction7,
                     option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
                 )
+                with open(os.path.join("new_approx_res", f"Target_{loss_name}_{approximate_function_name}_{p}_{option_name}"), "w") as f:
+                    for line in res:
+                        print(line.strip(), file=f, flush=True)
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
