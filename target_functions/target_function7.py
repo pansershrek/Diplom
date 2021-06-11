@@ -25,7 +25,7 @@ class TargetFunction7_1(BaseTargetFunction):
         if self.x2y:
             return self.x2y[str(get_numpy_array(self.x))]
         return (
-            tf.math.exp(self.x[0] + self.x[1]**2) + self.x[2]**4
+            tf.math.exp((self.x[0]**4 + self.x[1]**2) / 100.0) + self.x[2]
         )
 
 
