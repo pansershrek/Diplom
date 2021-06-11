@@ -1,6 +1,7 @@
 import argparse
 import logging
 import json
+import tensorflow as tf
 import math
 import os
 from utils.process import process_optimize, proccess_approximate
@@ -109,7 +110,6 @@ import numpy as np
 
 
 def get_metods(alphas):
-    import tensorflow as tf
     methods = []
     for alpha in alphas:
         methods.append(tf.keras.optimizers.SGD(learning_rate=alpha))
@@ -227,13 +227,15 @@ def approximate_example(args, f, target, opt, name=""):
                 "Train loss": str(x["result"]["loss_min"]),
                 "metrix": y,
             }
-            #print(json.dumps(new_result), flush=True)
+            print(json.dumps(new_result), flush=True)
             res.append(json.dumps(new_result))
             #print(json.dumps(new_result), file=file, flush=True)
     return res
 
 
 def main():
+    tf.debugging.set_log_device_placement(True)
+    print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--ans', type=str, default="ans",
@@ -293,25 +295,17 @@ def main():
     print("axis_parallel_hyper_ellipsisoid_fnc")
     minimize_example(args, eval("axis_parallel_hyper_ellipsisoid_fnc"), option)
     """
+    alphas = [1000.0 / 10**x for x in range(8)]
+    methods = get_metods(alphas)
+
+    losses = [
+        [tf.keras.losses.MAE, "L_1"],
+        [rmse, "L_2"],
+        [L_inf, "L_inf"],
+    ]
 
     for loss, loss_name in losses:
         for p in [[4 + x, 2 + x, 2 + x] for x in range(0, 1)]:
-            import sys
-            print("BEGIN FORK", flush=True, file=sys.stderr)
-            pid = os.fork()
-            if pid != 0:
-                continue
-            import tensorflow as tf
-            tf.debugging.set_log_device_placement(True)
-            print('Default GPU Device: {}'.format(tf.test.gpu_device_name()))
-            alphas = [1000.0 / 10**x for x in range(8)]
-            methods = get_metods(alphas)
-
-            losses = [
-                [tf.keras.losses.MAE, "L_1"],
-                [rmse, "L_2"],
-                [L_inf, "L_inf"],
-            ]
             ApproximateFunction7_1.P = p[0]
             ApproximateFunction7_2.P = p[1]
             ApproximateFunction7_3.P = p[2]
@@ -329,13 +323,16 @@ def main():
             ]
             for all_options, approximate_function, approximate_function_name in all_approximate_options7:
                 option, option_name = all_options
-                res = approximate_example(
+                #pid = os.fork()
+                # if pid != 0:
+                #    continue
+                approximate_example(
                     args, approximate_function, TargetFunction7,
                     option, f"Smoth_{loss_name}_{approximate_function_name}_{option_name}"
                 )
-                with open(os.path.join("new_approx_res", f"Target_{loss_name}_{approximate_function_name}_{p}_{option_name}"), "w") as f:
-                    for line in res:
-                        print(line.strip(), file=f, flush=True)
+                # with open(os.path.join("new_approx_res", f"Target_{loss_name}_{approximate_function_name}_{}_{option_name}"), "w") as f:
+                #    for line in res:
+                #        print(line.strip(), file=f, flush=True)
     """
     approximate_options71 = [
         #[approximate_options7_1, "WithoutNoise"],
