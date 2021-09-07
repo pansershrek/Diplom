@@ -13,9 +13,10 @@ class ApproximateFunction1(BaseApproximateFunction):
         :param params: params
         :type params: list
         """
-        return (
-            params[0] * self.x[0]**3 + params[1] * self.x[0]**2 + params[2] * self.x[0] + params[3] +
-            params[4] * self.x[1]**3 + params[5] * self.x[0]**2 + params[6] * self.x[0] + params[7] +
-            params[8] * self.x[0]**2 * self.x[1] + params[9] * self.x[0] * self.x[1] ** 2 +
-            params[10] * self.x[0] * self.x[1]
-        )
+        result = 0
+        for ind in range(len(self.x)):
+            for p in range(0, 3):
+                result += params[ind * 6 + 2 * p] * \
+                    tf.math.exp(params[ind * 6 + 2 * p + 1]) * self.x[ind]
+        result += params[-1]
+        return result

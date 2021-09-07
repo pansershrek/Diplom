@@ -1,237 +1,40 @@
 import numpy as np
 import tensorflow as tf
+import copy
 
+from utils.generate_data import generate_x
 from utils.utils import convert_variables, convert_variables_without_trainable
+from utils.generate_data import generate_set
+
+from sklearn.datasets import load_boston
+
+X, y = load_boston(return_X_y=True)
+
+x = X[:100]
+x_validate = X[420:]
 
 """
-Approximate options
+approximate_options = [
+    {
+        "x": [], # list of points where function trains
+        "x_validate": [], # list of points where function validates
+        "params": [], # target function parametrs
+        "loss_function": None # tf.keras.losses.MSE, loss function
+        "opt": None, # optimize algo
+        "eps": 0, # min distance between steps
+        "max_steps": 0, # max steps
+    },
+]
 """
 
 approximate_options1 = [
     {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.Adam(learning_rate=0.001),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.Adam(learning_rate=0.01),
-        "eps": 0.0001,
-        "max_steps": 10000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.Adam(learning_rate=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.Adam(learning_rate=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.Adam(learning_rate=10),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.001),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.01),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
+        "x": [convert_variables_without_trainable(x_tmp) for x_tmp in x],
+        "x_validate": [convert_variables_without_trainable(x_tmp) for x_tmp in x_validate],
+        "params": convert_variables([5 for x in range(79)]),
+        "loss_function": tf.keras.losses.MSE,
         "opt": tf.keras.optimizers.SGD(learning_rate=1),
         "eps": 0.0001,
-        "max_steps": 1000,
+        "max_steps": 30,
     },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=10),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.001, momentum=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.01, momentum=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.1, momentum=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=1, momentum=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=10, momentum=0.1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.001, momentum=0.5),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.01, momentum=0.5),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.1, momentum=0.5),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=1, momentum=0.5),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=10, momentum=0.5),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.001, momentum=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.01, momentum=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=0.1, momentum=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=1, momentum=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-    {
-        "x": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0, 5, 0.2))],
-        "x_validate": [convert_variables_without_trainable([x, x]) for x in list(np.arange(0.1, 5, 0.02))],
-        "params": convert_variables([1 for x in range(11)]),
-        "loss_function": tf.keras.losses.MAE,
-        "opt": tf.keras.optimizers.SGD(learning_rate=10, momentum=1),
-        "eps": 0.0001,
-        "max_steps": 1000,
-    },
-
 ]
